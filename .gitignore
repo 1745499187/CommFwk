@@ -1,6 +1,7 @@
 *.class
 bin/*
 *.~ml
+.settings/*
 
 # Package Files #
 #*.jar
