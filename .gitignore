@@ -1,5 +1,6 @@
 *.class
 bin/*
+*.~ml
 
 # Package Files #
 #*.jar
