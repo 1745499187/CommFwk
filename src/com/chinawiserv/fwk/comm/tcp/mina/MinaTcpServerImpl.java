@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 import com.chinawiserv.fwk.comm.tcp.CWTcpHandler; 
 import com.chinawiserv.fwk.comm.tcp.CWTcpServerImpl; 
 import com.chinawiserv.fwk.constant.CWCharset;
-import com.chinawiserv.fwk.constant.ETcpProtocol;
+import com.chinawiserv.fwk.constant.ETcpAppProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
 
 /**
@@ -61,7 +61,7 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 		port = _port;
 	}
 	
-	public boolean open(ETcpProtocol _protocol) {
+	public boolean open(ETcpAppProtocol _protocol) {
 		
 		InetSocketAddress address = null;
 		if ("127.0.0.1".equals(ipAddr) || "localhost".equalsIgnoreCase(ipAddr) || "".equals(ipAddr) || ipAddr==null) {
@@ -99,7 +99,7 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 			break;
 		}
 		// loggingFilter should be the last one !!
-		filterChain.addLast("logging", new CWTcpLoggingFilter(MinaTcpServerImpl.class));
+		filterChain.addLast("logging", new MinaCWLoggingFilter(MinaTcpServerImpl.class));
 		
 		IoHandlerAdapter minaTcpServerHandler = new MinaTcpServerHandler( handler , sessionEventListener );
 		//IoHandlerAdapter minaTcpServerHandler = new MinaTcpServerHandlerTest();

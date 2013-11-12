@@ -2,7 +2,7 @@ package com.chinawiserv.fwk.comm.tcp;
 
 import com.chinawiserv.fwk.comm.tcp.mina.MinaTcpServerImpl;
 import com.chinawiserv.fwk.comm.tcp.mina.MinaTcpClientImpl;
-import com.chinawiserv.fwk.constant.ETcpProtocol;
+import com.chinawiserv.fwk.constant.ETcpAppProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
 
 /**
@@ -19,7 +19,7 @@ import com.chinawiserv.fwk.session.CWSessionEventListener;
  */
 public class CWTcpClient {
 	private CWTcpClientImpl impl = null;
-	private ETcpProtocol protocol = null;
+	private ETcpAppProtocol protocol = null;
 	
 	public CWTcpClient( String _remoteIp, int _remotePort ) {
 		if( impl == null )
@@ -36,11 +36,11 @@ public class CWTcpClient {
 	}
 	
 	public boolean open() {
-		this.protocol = ETcpProtocol.P_TEXT_UTF8;
+		this.protocol = ETcpAppProtocol.P_TEXT_UTF8;
 		return impl.open(this.protocol);
 	}
 	
-	public boolean open(ETcpProtocol _protocol) {
+	public boolean open(ETcpAppProtocol _protocol) {
 		this.protocol = _protocol;
 		return impl.open(this.protocol);
 	}

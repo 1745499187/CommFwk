@@ -1,7 +1,7 @@
 package com.chinawiserv.service.test;
  
 import com.chinawiserv.fwk.comm.tcp.CWTcpClient;
-import com.chinawiserv.fwk.constant.ETcpProtocol;
+import com.chinawiserv.fwk.constant.ETcpAppProtocol;
 
 /**
  * <li>文件名称: TestCWSocket.java</li>
@@ -26,6 +26,6 @@ public class TestCWClient {
 		TestCWTcpClientHandler hnd = new TestCWTcpClientHandler();
 		sock.setCWTcpHandler(hnd);
 		sock.setCWSessionEventListener(hnd);
-		sock.open(ETcpProtocol.P_TEXT_UTF8); 
+		sock.open(ETcpAppProtocol.P_TEXT_UTF8); 
 	}
 }

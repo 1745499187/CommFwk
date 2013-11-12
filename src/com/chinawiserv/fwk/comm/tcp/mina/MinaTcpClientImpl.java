@@ -15,7 +15,7 @@ import org.apache.mina.transport.socket.nio.NioSocketConnector;
 import com.chinawiserv.fwk.comm.tcp.CWTcpHandler;
 import com.chinawiserv.fwk.comm.tcp.CWTcpClientImpl;
 import com.chinawiserv.fwk.constant.CWCharset;
-import com.chinawiserv.fwk.constant.ETcpProtocol;
+import com.chinawiserv.fwk.constant.ETcpAppProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
 
 /**
@@ -65,7 +65,7 @@ public class MinaTcpClientImpl implements CWTcpClientImpl {
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpSocketImpl#open()
 	 */
 	@Override
-	public boolean open(ETcpProtocol _protocol) {
+	public boolean open(ETcpAppProtocol _protocol) {
 		connector = new NioSocketConnector(); 
 		connector.setHandler(new MinaTcpClientHandler( handler, sessionEventListener ));
 		 
@@ -86,7 +86,7 @@ public class MinaTcpClientImpl implements CWTcpClientImpl {
 			break;
 		}
 		// loggingFilter should be the last one !!
-		filterChain.addLast("logging", new CWTcpLoggingFilter(MinaTcpClientImpl.class));
+		filterChain.addLast("logging", new MinaCWLoggingFilter(MinaTcpClientImpl.class));
 		 
 		ConnectFuture cf = connector.connect(new InetSocketAddress(remoteIp, remotePort));
 		

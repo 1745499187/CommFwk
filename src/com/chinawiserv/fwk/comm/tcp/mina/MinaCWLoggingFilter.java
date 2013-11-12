@@ -7,26 +7,26 @@ import org.apache.mina.core.write.WriteRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CWTcpLoggingFilter extends IoFilterAdapter {
+public class MinaCWLoggingFilter extends IoFilterAdapter {
 	
 	protected Logger logger;
 	
 	protected static String LINE_DELIMITER = "\r\n";
 	
-	public CWTcpLoggingFilter() {
-		logger = LoggerFactory.getLogger(CWTcpLoggingFilter.class);
+	public MinaCWLoggingFilter() {
+		logger = LoggerFactory.getLogger(MinaCWLoggingFilter.class);
 	}
 	
-	public CWTcpLoggingFilter(String name) {
+	public MinaCWLoggingFilter(String name) {
 		if(name == null) {
-			logger = LoggerFactory.getLogger(CWTcpLoggingFilter.class);
+			logger = LoggerFactory.getLogger(MinaCWLoggingFilter.class);
 		}
 		else {
 			logger = LoggerFactory.getLogger(name);
 		}
 	}
 	
-	public CWTcpLoggingFilter(Class<?> clazz) {
+	public MinaCWLoggingFilter(Class<?> clazz) {
 		logger = LoggerFactory.getLogger(clazz);
 	}
 	

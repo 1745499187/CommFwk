@@ -3,7 +3,7 @@ package com.chinawiserv.service.test;
 import org.apache.log4j.PropertyConfigurator;
 
 import com.chinawiserv.fwk.comm.tcp.CWTcpServer;
-import com.chinawiserv.fwk.constant.ETcpProtocol;
+import com.chinawiserv.fwk.constant.ETcpAppProtocol;
 
 /**
  * <li>文件名称: TestMain.java</li>
@@ -27,7 +27,7 @@ public class TestCWServer {
 		TestCWTcpServerHandler hnd = new TestCWTcpServerHandler();
 		server.setCWTcpHandler(hnd);
 		server.setCWSessionEventListener(hnd);
-		server.open(ETcpProtocol.P_TEXT_UTF8);
+		server.open(ETcpAppProtocol.P_TEXT_UTF8);
 	}
 
 }

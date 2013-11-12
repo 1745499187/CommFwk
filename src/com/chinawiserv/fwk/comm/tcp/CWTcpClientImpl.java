@@ -2,7 +2,7 @@ package com.chinawiserv.fwk.comm.tcp;
 
 import org.apache.mina.filter.codec.ProtocolCodecFactory;
 
-import com.chinawiserv.fwk.constant.ETcpProtocol;
+import com.chinawiserv.fwk.constant.ETcpAppProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
 
 /**
@@ -23,7 +23,7 @@ public interface CWTcpClientImpl {
 	
 	public void setRemotePort( int _remotePort );
 	
-	public boolean open(ETcpProtocol _protocol);
+	public boolean open(ETcpAppProtocol _protocol);
 	
 	public boolean close();
 	
