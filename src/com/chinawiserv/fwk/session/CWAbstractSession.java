@@ -19,7 +19,7 @@ import com.chinawiserv.fwk.util.CWIDGenerator;
  * @version 1.0
  * @author FWK Team
  */
-public class CWAbstractSession implements CWSession {
+public abstract class CWAbstractSession implements CWSession {
 	
 	private long id = 0;
     private static CWIDGenerator idGen = new CWIDGenerator();

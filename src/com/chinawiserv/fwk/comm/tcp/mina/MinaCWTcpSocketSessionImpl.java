@@ -1,8 +1,9 @@
 package com.chinawiserv.fwk.comm.tcp.mina;
 
+import org.apache.mina.core.future.ReadFuture;
 import org.apache.mina.core.session.IoSession;
 
-import com.chinawiserv.fwk.comm.tcp.CWTcpSocketSessionImpl;
+import com.chinawiserv.fwk.comm.tcp.CWTcpClientSessionImpl;
 
 /**
  * <li>文件名称: MinaCWTcpSocketSessionImpl.java</li>
@@ -16,7 +17,7 @@ import com.chinawiserv.fwk.comm.tcp.CWTcpSocketSessionImpl;
  * @version 1.0
  * @author FWK Team
  */
-public class MinaCWTcpSocketSessionImpl implements CWTcpSocketSessionImpl {
+public class MinaCWTcpSocketSessionImpl implements CWTcpClientSessionImpl {
 	
 	private IoSession minaSession;
 	
@@ -29,9 +30,9 @@ public class MinaCWTcpSocketSessionImpl implements CWTcpSocketSessionImpl {
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpSocketSessionImpl#read()
 	 */
 	@Override
-	public void read() {
-		minaSession.read();
-		
+	public Object read() {
+		ReadFuture rf = minaSession.read().awaitUninterruptibly();
+		return rf.getMessage();
 	}
 
 	/* (non-Javadoc)
@@ -40,7 +41,6 @@ public class MinaCWTcpSocketSessionImpl implements CWTcpSocketSessionImpl {
 	@Override
 	public void write(Object message) {
 		minaSession.write(message);
-		
 	}
 
 	/* (non-Javadoc)

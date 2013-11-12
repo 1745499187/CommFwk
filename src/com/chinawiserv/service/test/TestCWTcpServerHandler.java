@@ -1,7 +1,16 @@
 package com.chinawiserv.service.test;
 
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
+
+import org.apache.mina.core.buffer.IoBuffer;
+import org.apache.mina.core.buffer.IoBufferAllocator;
+import org.apache.mina.core.buffer.SimpleBufferAllocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chinawiserv.fwk.comm.tcp.CWTcpHandler;
-import com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession;
+import com.chinawiserv.fwk.comm.tcp.CWTcpClientSession;
 import com.chinawiserv.fwk.core.CWException;
 import com.chinawiserv.fwk.session.CWAbstractSessionEventListener;
 import com.chinawiserv.fwk.session.CWSession;
@@ -19,7 +28,8 @@ import com.chinawiserv.fwk.session.CWSession;
  * @author FWK Team
  */
 public class TestCWTcpServerHandler extends CWAbstractSessionEventListener implements CWTcpHandler {
-
+	private final static Logger logger = LoggerFactory.getLogger(TestCWTcpServerHandler.class);
+	
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#sessionCreated(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession)
 	 */
@@ -43,11 +53,6 @@ public class TestCWTcpServerHandler extends CWAbstractSessionEventListener imple
 	 */
 	@Override
 	public void sessionOpened(CWSession session) throws CWException {
-		// TODO Auto-generated method stub
-		
-		System.out.println( "serverHandler sessionOpened" );
-		//session.write( "serverHandler sessionOpened" );
-		
 	}
 
 	/* (non-Javadoc)
@@ -63,25 +68,18 @@ public class TestCWTcpServerHandler extends CWAbstractSessionEventListener imple
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#messageReceived(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Object)
 	 */
 	@Override
-	public void messageReceived(CWTcpSocketSession session, Object message) {
-		System.out.println( message );
-		 try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void messageReceived(CWTcpClientSession session, Object message) {
+		if(message instanceof String) {
+			String reply = "Echo: " + (String)message;
+			session.write(reply);
 		}
-		session.write(message);
 	}
 
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#messageSent(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Object)
 	 */
 	@Override
-	public void messageSent(CWTcpSocketSession session, Object message)
-			throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void messageSent(CWTcpClientSession session, Object message) {
 	}
 
 }

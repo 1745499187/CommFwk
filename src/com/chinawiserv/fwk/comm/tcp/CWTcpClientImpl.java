@@ -6,7 +6,7 @@ import com.chinawiserv.fwk.constant.ETcpProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
 
 /**
- * <li>文件名称: CWTcpServerImpl.java</li>
+ * <li>文件名称: CWTcpSocketImpl.java</li>
  * <li>文件描述: 本类描述</li>
  * <li>版权所有: 版权所有(C)2005-2013</li>
  * <li>公司: 勤智数码</li>
@@ -17,13 +17,13 @@ import com.chinawiserv.fwk.session.CWSessionEventListener;
  * @version 1.0
  * @author FWK Team
  */
-public interface CWTcpServerImpl {
+public interface CWTcpClientImpl {
 	
-	public void setIpAddress( String _ipAddress );
+	public void setRemoteIp( String _remoteIp );
 	
-	public void setPort( int _port );
+	public void setRemotePort( int _remotePort );
 	
-	public boolean open(ETcpProtocol protocol);
+	public boolean open(ETcpProtocol _protocol);
 	
 	public boolean close();
 	

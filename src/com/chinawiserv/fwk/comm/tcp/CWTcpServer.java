@@ -1,6 +1,7 @@
 package com.chinawiserv.fwk.comm.tcp;
 
 import com.chinawiserv.fwk.comm.tcp.mina.MinaTcpServerImpl;
+import com.chinawiserv.fwk.constant.ETcpProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
  
 /**
@@ -17,20 +18,14 @@ import com.chinawiserv.fwk.session.CWSessionEventListener;
  */
 public class CWTcpServer {
 	private CWTcpServerImpl impl = null;
+	private ETcpProtocol protocol = null;
 	
 	public CWTcpServer( String _ipAddr, int _port ) {
-		if( impl == null )
-			impl = new MinaTcpServerImpl( _ipAddr, _port );
-		
-		impl.setIpAddress(_ipAddr);
-		impl.setPort(_port);
+		impl = new MinaTcpServerImpl( _ipAddr, _port );
 	}
 	
 	public CWTcpServer( int _port ) {
-		if( impl == null )
-			impl = new MinaTcpServerImpl( _port );
-		
-		impl.setPort(_port);
+		impl = new MinaTcpServerImpl( _port );
 	}
 	
 	public void setCWTcpServerImpl( CWTcpServerImpl _impl )
@@ -39,7 +34,13 @@ public class CWTcpServer {
 	}
 	
 	public boolean open() {
-		return impl.open();
+		this.protocol = ETcpProtocol.P_TEXT_UTF8;
+		return impl.open(this.protocol);
+	}
+	
+	public boolean open(ETcpProtocol _protocol) {
+		this.protocol = _protocol;
+		return impl.open(this.protocol);
 	}
 	
 	public boolean close() {

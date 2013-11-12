@@ -48,4 +48,7 @@ public interface CWSession {
     
     public void setListener( CWSessionEventListener listener );
 
+    public void write(Object message);
+    
+    public Object read();
 }

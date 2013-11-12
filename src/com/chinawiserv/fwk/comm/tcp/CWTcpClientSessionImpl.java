@@ -1,9 +1,11 @@
 package com.chinawiserv.fwk.comm.tcp;
 
-import com.chinawiserv.fwk.session.CWSessionEventListener;
+import org.apache.mina.core.session.IoSession;
+
+import com.chinawiserv.fwk.session.CWAbstractSession;
 
 /**
- * <li>文件名称: CWTcpSocketImpl.java</li>
+ * <li>文件名称: CWTcpSocketSessionImpl.java</li>
  * <li>文件描述: 本类描述</li>
  * <li>版权所有: 版权所有(C)2005-2013</li>
  * <li>公司: 勤智数码</li>
@@ -14,17 +16,16 @@ import com.chinawiserv.fwk.session.CWSessionEventListener;
  * @version 1.0
  * @author FWK Team
  */
-public interface CWTcpSocketImpl {
+public interface CWTcpClientSessionImpl {
 	
-	public void setRemoteIp( String _remoteIp );
+	public Object read();
 	
-	public void setRemotePort( int _remotePort );
-	
-	public boolean open();
+	public void write( Object message );
 	
 	public boolean close();
 	
-	public void setCWTcpHandler( CWTcpHandler _handler );
+	public boolean isConnected();
 	
-	public void setCWSessionEventListener( CWSessionEventListener _listener );
+	public boolean isClosing();
+	
 }

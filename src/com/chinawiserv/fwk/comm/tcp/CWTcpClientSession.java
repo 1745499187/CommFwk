@@ -16,18 +16,18 @@ import com.chinawiserv.fwk.session.CWAbstractSession;
  * @version 1.0
  * @author FWK Team
  */
-public class CWTcpSocketSession extends CWAbstractSession {
-	 private CWTcpSocketSessionImpl impl;
+public class CWTcpClientSession extends CWAbstractSession {
+	 private CWTcpClientSessionImpl impl;
 	 
-	 public CWTcpSocketSession() { 
+	 public CWTcpClientSession() { 
 	 }
 	 
-	 public void setCWTcpSocketSessionImpl( CWTcpSocketSessionImpl _impl ) {
+	 public void setCWTcpSocketSessionImpl( CWTcpClientSessionImpl _impl ) {
 		 impl = _impl;
 	 }
 	 
-	 public void read() {
-		 impl.read();
+	 public Object read() {
+		 return impl.read();
 	 }
 	 
 	 public void write( Object message ) {

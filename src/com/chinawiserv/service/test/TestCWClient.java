@@ -1,6 +1,7 @@
 package com.chinawiserv.service.test;
  
-import com.chinawiserv.fwk.comm.tcp.CWTcpSocket;
+import com.chinawiserv.fwk.comm.tcp.CWTcpClient;
+import com.chinawiserv.fwk.constant.ETcpProtocol;
 
 /**
  * <li>文件名称: TestCWSocket.java</li>
@@ -14,15 +15,17 @@ import com.chinawiserv.fwk.comm.tcp.CWTcpSocket;
  * @version 1.0
  * @author FWK Team
  */
-public class TestCWSocket {
+public class TestCWClient {
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		CWTcpSocket sock = new CWTcpSocket("127.0.0.1", 5000);
-		sock.setCWTcpHandler( new TestCWTcpSocketHandler() );
-		sock.open(); 
+		CWTcpClient sock = new CWTcpClient("127.0.0.1", 5000);
+		TestCWTcpClientHandler hnd = new TestCWTcpClientHandler();
+		sock.setCWTcpHandler(hnd);
+		sock.setCWSessionEventListener(hnd);
+		sock.open(ETcpProtocol.P_TEXT_UTF8); 
 	}
 }

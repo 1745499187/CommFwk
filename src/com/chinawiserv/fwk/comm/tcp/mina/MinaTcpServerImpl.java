@@ -2,14 +2,27 @@ package com.chinawiserv.fwk.comm.tcp.mina;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.charset.Charset;
 
+import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
+import org.apache.mina.core.filterchain.IoFilterChainBuilder;
 import org.apache.mina.core.service.IoHandler;
 import org.apache.mina.core.service.IoHandlerAdapter;
+import org.apache.mina.filter.codec.ProtocolCodecFactory;
+import org.apache.mina.filter.codec.ProtocolCodecFilter;
+import org.apache.mina.filter.codec.textline.LineDelimiter;
+import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
+import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.SocketAcceptor;
+import org.apache.mina.transport.socket.SocketSessionConfig;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.chinawiserv.fwk.comm.tcp.CWTcpHandler; 
 import com.chinawiserv.fwk.comm.tcp.CWTcpServerImpl; 
+import com.chinawiserv.fwk.constant.CWCharset;
+import com.chinawiserv.fwk.constant.ETcpProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
 
 /**
@@ -25,43 +38,69 @@ import com.chinawiserv.fwk.session.CWSessionEventListener;
  * @author FWK Team
  */
 public class MinaTcpServerImpl implements CWTcpServerImpl {
+	private final static Logger logger = LoggerFactory.getLogger(MinaTcpServerImpl.class);
 	
 	private SocketAcceptor acceptor;	
 	private String ipAddr;
 	private int port;
 	private CWTcpHandler handler = null;
-	CWSessionEventListener sessionEventListener = null;
+	private CWSessionEventListener sessionEventListener = null;
 	 
 	public MinaTcpServerImpl( String _ipAddr, int _port ) {
-		ipAddr = _ipAddr;
+		if(_ipAddr == null) {
+			ipAddr = "";
+		}
+		else {
+			ipAddr = _ipAddr;
+		}
 		port = _port;
 	}
 	
 	public MinaTcpServerImpl( int _port ) {
+		ipAddr = "";
 		port = _port;
 	}
 	
-	public boolean open() {
+	public boolean open(ETcpProtocol _protocol) {
 		
 		InetSocketAddress address = null;
-		if ("127.0.0.1".equals(ipAddr) || "localhost".equalsIgnoreCase(ipAddr) ||  ipAddr==null ) {
+		if ("127.0.0.1".equals(ipAddr) || "localhost".equalsIgnoreCase(ipAddr) || "".equals(ipAddr) || ipAddr==null) {
 			address = new InetSocketAddress(port);
 		} else {
 			address = new InetSocketAddress(ipAddr, port);
 		}
 		
 		acceptor = new NioSocketAcceptor(Runtime.getRuntime().availableProcessors());
-//		acceptor.setReuseAddress(true);
+		acceptor.setReuseAddress(true);
 		
 //		String readBufferSize = (String) getAttribute( TcpConstants.Attribute.TCP_READ_BUFFER_SIZE, TcpConstants.Attribute.DEFAULT_TCP_READ_BUFFER_SIZE + "" );
 //		String recvBufferSize = (String) getAttribute( TcpConstants.Attribute.TCP_RECV_BUFFER_SIZE, TcpConstants.Attribute.DEFAULT_TCP_RECV_BUFFER_SIZE + "" );
 //		String idleTimeout = (String) getAttribute( TcpConstants.Attribute.TCP_IDLE_TIMEOUT, TcpConstants.Attribute.DEFAULT_TCP_IDLE_TIMEOUT + "" );
 // 
-//		SocketSessionConfig sockConfig = acceptor.getSessionConfig();
+		SocketSessionConfig sockConfig = acceptor.getSessionConfig();
+		sockConfig.setReuseAddress(true);
+		sockConfig.setUseReadOperation(false);
 //		sockConfig.setReadBufferSize( Integer.valueOf( readBufferSize ) );
 //		sockConfig.setReceiveBufferSize( Integer.valueOf( recvBufferSize ) );
 //		sockConfig.setIdleTime(IdleStatus.BOTH_IDLE, Integer.valueOf( idleTimeout ) ); 
  
+		DefaultIoFilterChainBuilder filterChain = acceptor.getFilterChain();
+		switch(_protocol) {
+		case P_TEXT_UTF8:
+			filterChain.addLast("codec", 
+					new ProtocolCodecFilter(
+							new TextLineCodecFactory(CWCharset.UTF_8.CHARSET, LineDelimiter.NUL, LineDelimiter.NUL
+					)));
+			break;
+		case P_X_733:
+			break;
+		case P_BINARY:
+		default:
+			break;
+		}
+		// loggingFilter should be the last one !!
+		filterChain.addLast("logging", new CWTcpLoggingFilter(MinaTcpServerImpl.class));
+		
 		IoHandlerAdapter minaTcpServerHandler = new MinaTcpServerHandler( handler , sessionEventListener );
 		//IoHandlerAdapter minaTcpServerHandler = new MinaTcpServerHandlerTest();
 		if( handler != null )
@@ -76,6 +115,8 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 			
 			return false;
 		}
+		
+		logger.info("Server started at ["+this.ipAddr + ":" + this.port+"]");
 		
 		return true;
 	}

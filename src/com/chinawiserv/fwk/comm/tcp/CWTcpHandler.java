@@ -14,8 +14,8 @@ package com.chinawiserv.fwk.comm.tcp;
  */
 public interface CWTcpHandler { 
 	
-	public void messageReceived(CWTcpSocketSession session, Object message);
+	public void messageReceived(CWTcpClientSession session, Object message);
 	
-	public void messageSent(CWTcpSocketSession session, Object message) throws Exception;
+	public void messageSent(CWTcpClientSession session, Object message);
  
 }

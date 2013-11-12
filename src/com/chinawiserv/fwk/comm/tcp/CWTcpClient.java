@@ -1,7 +1,8 @@
 package com.chinawiserv.fwk.comm.tcp;
 
 import com.chinawiserv.fwk.comm.tcp.mina.MinaTcpServerImpl;
-import com.chinawiserv.fwk.comm.tcp.mina.MinaTcpSocketImpl;
+import com.chinawiserv.fwk.comm.tcp.mina.MinaTcpClientImpl;
+import com.chinawiserv.fwk.constant.ETcpProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
 
 /**
@@ -16,25 +17,32 @@ import com.chinawiserv.fwk.session.CWSessionEventListener;
  * @version 1.0
  * @author FWK Team
  */
-public class CWTcpSocket {
-	private CWTcpSocketImpl impl = null;
+public class CWTcpClient {
+	private CWTcpClientImpl impl = null;
+	private ETcpProtocol protocol = null;
 	
-	public CWTcpSocket( String _remoteIp, int _remotePort ) {
+	public CWTcpClient( String _remoteIp, int _remotePort ) {
 		if( impl == null )
-			impl = new MinaTcpSocketImpl( _remoteIp, _remotePort );
+			impl = new MinaTcpClientImpl( _remoteIp, _remotePort );
 		else {
 			impl.setRemoteIp(_remoteIp);
 			impl.setRemotePort(_remotePort);
 		}
 	} 
 	
-	public void setCWTcpServerImpl( CWTcpSocketImpl _impl )
+	public void setCWTcpServerImpl( CWTcpClientImpl _impl )
 	{
 		impl = _impl;
 	}
 	
 	public boolean open() {
-		return impl.open();
+		this.protocol = ETcpProtocol.P_TEXT_UTF8;
+		return impl.open(this.protocol);
+	}
+	
+	public boolean open(ETcpProtocol _protocol) {
+		this.protocol = _protocol;
+		return impl.open(this.protocol);
 	}
 	
 	public boolean close() {

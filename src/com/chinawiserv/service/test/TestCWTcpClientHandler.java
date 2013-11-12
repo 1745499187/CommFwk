@@ -1,7 +1,12 @@
 package com.chinawiserv.service.test;
 
+import java.util.Date;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.chinawiserv.fwk.comm.tcp.CWTcpHandler;
-import com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession;
+import com.chinawiserv.fwk.comm.tcp.CWTcpClientSession;
 import com.chinawiserv.fwk.core.CWException;
 import com.chinawiserv.fwk.session.CWAbstractSessionEventListener;
 import com.chinawiserv.fwk.session.CWSession;
@@ -18,14 +23,14 @@ import com.chinawiserv.fwk.session.CWSession;
  * @version 1.0
  * @author FWK Team
  */
-public class TestCWTcpSocketHandler extends CWAbstractSessionEventListener implements CWTcpHandler {
-
+public class TestCWTcpClientHandler extends CWAbstractSessionEventListener implements CWTcpHandler {
+	private final static Logger logger = LoggerFactory.getLogger(TestCWTcpClientHandler.class);
+	
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#sessionCreated(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession)
 	 */
 	@Override
 	public void sessionCreated(CWSession session) {
-		
 		
 	} 
 	
@@ -33,26 +38,28 @@ public class TestCWTcpSocketHandler extends CWAbstractSessionEventListener imple
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#messageReceived(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Object)
 	 */
 	@Override
-	public void messageReceived(CWTcpSocketSession session, Object message) {
-		System.out.println( message );
-		 try {
-			Thread.sleep(100);
+	public void messageReceived(CWTcpClientSession session, Object message) {
+		try {
+			Thread.sleep(1000 * 10);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		session.write(message);
-		
+		session.write("Current time is ["+new Date()+"]");
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#messageSent(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Object)
+	 */
+	@Override
+	public void messageSent(CWTcpClientSession session, Object message) {
+	} 
 
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSessionEventListener#sessionOpened(com.chinawiserv.fwk.session.CWSession)
 	 */
 	@Override
 	public void sessionOpened(CWSession session) throws CWException {
-		// TODO Auto-generated method stub
-		
+		session.write("Hello!");
 	}
 
 
@@ -61,8 +68,6 @@ public class TestCWTcpSocketHandler extends CWAbstractSessionEventListener imple
 	 */
 	@Override
 	public void sessionClosed(CWSession session) throws CWException {
-		// TODO Auto-generated method stub
-		
 	}
 
 
@@ -70,21 +75,6 @@ public class TestCWTcpSocketHandler extends CWAbstractSessionEventListener imple
 	 * @see com.chinawiserv.fwk.session.CWSessionEventListener#exceptionCaught(com.chinawiserv.fwk.session.CWSession, java.lang.Throwable)
 	 */
 	@Override
-	public void exceptionCaught(CWSession session, Throwable cause)
-			throws CWException {
-		// TODO Auto-generated method stub
-		
+	public void exceptionCaught(CWSession session, Throwable cause) throws CWException {
 	}
-
-
-	/* (non-Javadoc)
-	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#messageSent(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Object)
-	 */
-	@Override
-	public void messageSent(CWTcpSocketSession session, Object message)
-			throws Exception {
-		// TODO Auto-generated method stub
-		
-	} 
-
 }

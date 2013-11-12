@@ -4,10 +4,18 @@ import java.net.InetSocketAddress;
 
 import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
 import org.apache.mina.core.future.ConnectFuture;
+import org.apache.mina.filter.codec.ProtocolCodecFactory;
+import org.apache.mina.filter.codec.ProtocolCodecFilter;
+import org.apache.mina.filter.codec.textline.LineDelimiter;
+import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
+import org.apache.mina.filter.logging.LoggingFilter;
+import org.apache.mina.transport.socket.SocketSessionConfig;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
 import com.chinawiserv.fwk.comm.tcp.CWTcpHandler;
-import com.chinawiserv.fwk.comm.tcp.CWTcpSocketImpl;
+import com.chinawiserv.fwk.comm.tcp.CWTcpClientImpl;
+import com.chinawiserv.fwk.constant.CWCharset;
+import com.chinawiserv.fwk.constant.ETcpProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
 
 /**
@@ -22,15 +30,15 @@ import com.chinawiserv.fwk.session.CWSessionEventListener;
  * @version 1.0
  * @author FWK Team
  */
-public class MinaTcpSocketImpl implements CWTcpSocketImpl {
+public class MinaTcpClientImpl implements CWTcpClientImpl {
 
 	private NioSocketConnector connector;	
 	private String remoteIp;
 	private int remotePort;
 	private CWTcpHandler handler = null;
-	CWSessionEventListener sessionEventListener = null;
+	private CWSessionEventListener sessionEventListener = null;
 	
-	public MinaTcpSocketImpl( String _remoteIp, int _remotePort ) {
+	public MinaTcpClientImpl( String _remoteIp, int _remotePort ) {
 		remoteIp = _remoteIp;
 		remotePort = _remotePort;
 	}
@@ -57,16 +65,34 @@ public class MinaTcpSocketImpl implements CWTcpSocketImpl {
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpSocketImpl#open()
 	 */
 	@Override
-	public boolean open() {
+	public boolean open(ETcpProtocol _protocol) {
 		connector = new NioSocketConnector(); 
-		 connector.setHandler(new MinaTcpSocketHandler( handler, sessionEventListener ));
+		connector.setHandler(new MinaTcpClientHandler( handler, sessionEventListener ));
 		 
-		 ConnectFuture cf = connector.connect(new
-				 InetSocketAddress(remoteIp, remotePort));
+		SocketSessionConfig sessionConfig = connector.getSessionConfig();
+		sessionConfig.setUseReadOperation(false);
+		 
+		DefaultIoFilterChainBuilder filterChain = connector.getFilterChain();
+		switch(_protocol) {
+		case P_TEXT_UTF8:
+			filterChain.addLast("codec", 
+					new ProtocolCodecFilter(
+							new TextLineCodecFactory(CWCharset.UTF_8.CHARSET, LineDelimiter.NUL, LineDelimiter.NUL
+					)));
+			break;
+		case P_BINARY:
+			break;
+		default:
+			break;
+		}
+		// loggingFilter should be the last one !!
+		filterChain.addLast("logging", new CWTcpLoggingFilter(MinaTcpClientImpl.class));
+		 
+		ConnectFuture cf = connector.connect(new InetSocketAddress(remoteIp, remotePort));
 		
-		 cf.awaitUninterruptibly();
-		 cf.getSession().getCloseFuture().awaitUninterruptibly();
-		 connector.dispose();
+		cf.awaitUninterruptibly();
+		cf.getSession().getCloseFuture().awaitUninterruptibly();
+		connector.dispose();
 		return true;
 	}
 
@@ -95,5 +121,5 @@ public class MinaTcpSocketImpl implements CWTcpSocketImpl {
 	public void setCWSessionEventListener(CWSessionEventListener _listener) {
 		sessionEventListener = _listener;
 		
-	}  
+	}
 }

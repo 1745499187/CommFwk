@@ -1,6 +1,9 @@
 package com.chinawiserv.service.test;
 
+import org.apache.log4j.PropertyConfigurator;
+
 import com.chinawiserv.fwk.comm.tcp.CWTcpServer;
+import com.chinawiserv.fwk.constant.ETcpProtocol;
 
 /**
  * <li>文件名称: TestMain.java</li>
@@ -15,15 +18,16 @@ import com.chinawiserv.fwk.comm.tcp.CWTcpServer;
  * @author FWK Team
  */
 public class TestCWServer {
-
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		CWTcpServer server = new CWTcpServer(5000);
-		server.setCWTcpHandler( new TestCWTcpServerHandler() );
-		server.open();
+		TestCWTcpServerHandler hnd = new TestCWTcpServerHandler();
+		server.setCWTcpHandler(hnd);
+		server.setCWSessionEventListener(hnd);
+		server.open(ETcpProtocol.P_TEXT_UTF8);
 	}
 
 }
