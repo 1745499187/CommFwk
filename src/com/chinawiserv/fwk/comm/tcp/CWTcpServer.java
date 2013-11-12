@@ -54,5 +54,8 @@ public class CWTcpServer {
 	public void setCWSessionEventListener( CWSessionEventListener _listener ) {
 		impl.setCWSessionEventListener(_listener);
 	}
-	 
+	
+	public ETcpAppProtocol getAppProtocol() {
+		return this.protocol;
+	}
 }

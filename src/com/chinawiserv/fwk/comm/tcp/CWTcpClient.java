@@ -1,6 +1,5 @@
 package com.chinawiserv.fwk.comm.tcp;
 
-import com.chinawiserv.fwk.comm.tcp.mina.MinaTcpServerImpl;
 import com.chinawiserv.fwk.comm.tcp.mina.MinaTcpClientImpl;
 import com.chinawiserv.fwk.constant.ETcpAppProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
@@ -55,5 +54,9 @@ public class CWTcpClient {
 	
 	public void setCWSessionEventListener( CWSessionEventListener _listener ) {
 		impl.setCWSessionEventListener(_listener);
+	}
+	
+	public ETcpAppProtocol getAppProtocol() {
+		return this.protocol;
 	}
 }
