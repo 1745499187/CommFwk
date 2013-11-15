@@ -16,9 +16,16 @@ import com.chinawiserv.fwk.session.CWAbstractSession;
  * @version 1.0
  * @author FWK Team
  */
-public interface CWTcpClientSessionImpl {
+public interface CWTcpSocketSessionImpl {
 	
 	public Object read();
+	
+	/**
+	 * @param timeout
+	 *        milli seconds
+	 * @return
+	 */
+	public Object read(int timeout);
 	
 	public void write( Object message );
 	

@@ -2,11 +2,14 @@ package com.chinawiserv.service.test;
 
 import java.util.Date;
 
+import net.sf.json.JSONObject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.chinawiserv.fwk.comm.tcp.CWTcpHandler;
-import com.chinawiserv.fwk.comm.tcp.CWTcpClientSession;
+import com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession;
+import com.chinawiserv.fwk.comm.tcp.mina.protocol.alertserver.typedef.ASTcpMsg;
 import com.chinawiserv.fwk.core.CWException;
 import com.chinawiserv.fwk.session.CWAbstractSessionEventListener;
 import com.chinawiserv.fwk.session.CWSession;
@@ -38,20 +41,28 @@ public class TestCWTcpClientHandler extends CWAbstractSessionEventListener imple
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#messageReceived(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Object)
 	 */
 	@Override
-	public void messageReceived(CWTcpClientSession session, Object message) {
-		try {
-			Thread.sleep(1000 * 10);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+	public void messageReceived(CWTcpSocketSession session, Object message) {
+		if(message instanceof ASTcpMsg) {
+			ASTcpMsg msg = (ASTcpMsg)message;
+			JSONObject json = JSONObject.fromObject(msg.getContent());
+			Integer infoType = (Integer)json.get("infotype");
+			String randnum = (String)json.get("randnum");
+			
+			JSONObject jsonObj = new JSONObject();
+	        jsonObj.put("randnum", randnum);
+	        jsonObj.put("name", "zhangweibin");
+	        
+	        session.write(new ASTcpMsg(jsonObj.toString()));
 		}
-		session.write("Current time is ["+new Date()+"]");
+		
+		
 	}
 
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#messageSent(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Object)
 	 */
 	@Override
-	public void messageSent(CWTcpClientSession session, Object message) {
+	public void messageSent(CWTcpSocketSession session, Object message) {
 	} 
 
 	/* (non-Javadoc)
@@ -59,7 +70,7 @@ public class TestCWTcpClientHandler extends CWAbstractSessionEventListener imple
 	 */
 	@Override
 	public void sessionOpened(CWSession session) throws CWException {
-		session.write("Hello!");
+//		session.write("Hello!");
 	}
 
 

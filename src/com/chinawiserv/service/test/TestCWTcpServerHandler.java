@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.chinawiserv.fwk.comm.tcp.CWTcpHandler;
-import com.chinawiserv.fwk.comm.tcp.CWTcpClientSession;
+import com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession;
 import com.chinawiserv.fwk.core.CWException;
 import com.chinawiserv.fwk.session.CWAbstractSessionEventListener;
 import com.chinawiserv.fwk.session.CWSession;
@@ -68,7 +68,7 @@ public class TestCWTcpServerHandler extends CWAbstractSessionEventListener imple
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#messageReceived(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Object)
 	 */
 	@Override
-	public void messageReceived(CWTcpClientSession session, Object message) {
+	public void messageReceived(CWTcpSocketSession session, Object message) {
 		if(message instanceof String) {
 			String reply = "Echo: " + (String)message;
 			session.write(reply);
@@ -79,7 +79,7 @@ public class TestCWTcpServerHandler extends CWAbstractSessionEventListener imple
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#messageSent(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Object)
 	 */
 	@Override
-	public void messageSent(CWTcpClientSession session, Object message) {
+	public void messageSent(CWTcpSocketSession session, Object message) {
 	}
 
 }

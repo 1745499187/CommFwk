@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import com.chinawiserv.fwk.comm.tcp.CWTcpHandler; 
 import com.chinawiserv.fwk.comm.tcp.CWTcpServerImpl; 
+import com.chinawiserv.fwk.comm.tcp.mina.protocol.alertserver.ASCodecFilter;
 import com.chinawiserv.fwk.constant.CWCharset;
 import com.chinawiserv.fwk.constant.ETcpAppProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
@@ -79,7 +80,7 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 // 
 		SocketSessionConfig sockConfig = acceptor.getSessionConfig();
 		sockConfig.setReuseAddress(true);
-		sockConfig.setUseReadOperation(false);
+		sockConfig.setUseReadOperation(true);
 //		sockConfig.setReadBufferSize( Integer.valueOf( readBufferSize ) );
 //		sockConfig.setReceiveBufferSize( Integer.valueOf( recvBufferSize ) );
 //		sockConfig.setIdleTime(IdleStatus.BOTH_IDLE, Integer.valueOf( idleTimeout ) ); 
@@ -91,6 +92,9 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 					new ProtocolCodecFilter(
 							new TextLineCodecFactory(CWCharset.UTF_8.CHARSET, LineDelimiter.NUL, LineDelimiter.NUL
 					)));
+			break;
+		case P_ALERT_SERVER:
+			filterChain.addLast("codec", new ASCodecFilter());
 			break;
 		case P_X_733:
 			break;

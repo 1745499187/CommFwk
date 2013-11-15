@@ -26,6 +26,6 @@ public class TestCWClient {
 		TestCWTcpClientHandler hnd = new TestCWTcpClientHandler();
 		sock.setCWTcpHandler(hnd);
 		sock.setCWSessionEventListener(hnd);
-		sock.open(ETcpAppProtocol.P_TEXT_UTF8); 
+		sock.open(ETcpAppProtocol.P_ALERT_SERVER); 
 	}
 }

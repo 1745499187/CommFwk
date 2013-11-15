@@ -51,4 +51,6 @@ public interface CWSession {
     public void write(Object message);
     
     public Object read();
+    
+    public Object read(int timeout);
 }
