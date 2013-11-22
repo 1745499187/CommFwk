@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="service"/>
 	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="src" path="conf"/>
 	<classpathentry kind="src" path="test"/>
@@ -12,12 +13,28 @@
 	<classpathentry kind="lib" path="lib/third/jcl-over-slf4j-1.6.6.jar"/>
 	<classpathentry kind="lib" path="lib/third/jzlib-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/third/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="lib/third/mina-core-2.0.7.jar"/>
+	<classpathentry kind="lib" path="lib/third/mina-core-2.0.7.jar" sourcepath="/MINA_src/src"/>
 	<classpathentry kind="lib" path="lib/third/ognl-3.0.5.jar"/>
 	<classpathentry kind="lib" path="lib/third/slf4j-api-1.7.5.jar"/>
 	<classpathentry kind="lib" path="lib/third/slf4j-log4j12-1.7.5.jar"/>
-	<classpathentry kind="lib" path="lib/third/spring-2.5.6.SEC03.jar"/>
+	<classpathentry kind="lib" path="lib/third/spring-2.5.6.SEC03.jar" sourcepath="C:/Documents and Settings/weibz/.m2/repository/org/springframework/spring/2.5.6.SEC03/spring-2.5.6.SEC03-sources.jar"/>
 	<classpathentry kind="lib" path="lib/third/tomcat-apr-5.5.23.jar"/>
 	<classpathentry kind="lib" path="lib/third/xbean-spring-3.11.1.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/cxf-2.5.2.jar" sourcepath="C:/Documents and Settings/weibz/.m2/repository/org/apache/cxf/cxf-bundle/2.5.2/cxf-bundle-2.5.2-sources.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/neethi-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/xmlschema-core-2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/wsdl4j-1.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/jetty-continuation-7.5.4.v20111024.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/jetty-http-7.5.4.v20111024.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/jetty-io-7.5.4.v20111024.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/jetty-security-7.5.4.v20111024.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/jetty-server-7.5.4.v20111024.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/jetty-util-7.5.4.v20111024.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/json-lib-2.2.2-jdk15.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/servlet-api.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/ezmorph-1.0.6.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/commons-beanutils-1.7.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/commons-lang-2.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
