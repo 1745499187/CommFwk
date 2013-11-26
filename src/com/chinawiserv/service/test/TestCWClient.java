@@ -22,7 +22,7 @@ public class TestCWClient {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		CWTcpClient sock = new CWTcpClient("127.0.0.1", 5000);
+		CWTcpClient sock = new CWTcpClient("127.0.0.1", 5001);
 		sock.setCWTcpHandler(new TestCWTcpClientHandler());
 		sock.setCWSessionEventListener(new TestCWTcpClientSessionEventListener());
 		sock.open(ETcpAppProtocol.P_BINARY); 

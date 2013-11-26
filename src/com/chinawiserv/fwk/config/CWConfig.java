@@ -12,8 +12,11 @@ package com.chinawiserv.fwk.config;
  * @version 1.0
  * @author FWK Team
  */
-public interface CWConfig {
-	public void init( String serviceName, String confFile );
+public interface CWConfig {	
+	public String getConfigFile();
 	
-	
+	public String getStringValue(String key);
+	public String getStringValue(String key, String defaultValue);
+	public int getIntValue(String key);
+	public int getIntValue(String key, int defaultValue);
 }

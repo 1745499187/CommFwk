@@ -18,8 +18,13 @@ public class Main extends AbstractCommFwkService {
 
 	@Override
 	public void start() {
+		// initial configuration
+		String configFile = "alertServer.properties";
+		ASConfig.init(configFile);
+				
 		// start TCP server to wait client connect
-		CWTcpServer tcpServer = new CWTcpServer(5000);
+		int listenPort = ASConfig.getInstance().getIntValue("ALERT_SERVER_PORT");
+		CWTcpServer tcpServer = new CWTcpServer(listenPort);
 		
 		ASTcpServerSessionManager sessionMgr = new ASTcpServerSessionManager();
 		tcpServer.setCWSessionEventListener(new ASTcpServerEventListener(sessionMgr));

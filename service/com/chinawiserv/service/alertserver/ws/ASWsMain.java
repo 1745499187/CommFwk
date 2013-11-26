@@ -12,6 +12,7 @@ import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.chinawiserv.service.alertserver.ASConfig;
 import com.chinawiserv.service.alertserver.tcp.ASTcpServerSessionManager;
 import com.chinawiserv.service.alertserver.typedef.ASMsg;
 
@@ -24,10 +25,16 @@ import com.chinawiserv.service.alertserver.typedef.ASMsg;
 public class ASWsMain {
 	private final static Logger logger = LoggerFactory.getLogger(ASWsMain.class); 
 	
-    private static String WSNAME = "alertserver";
+	private String WS_URI = null;
+    private String WS_NAME = null;
+    
+    public ASWsMain() {
+    	this.WS_URI = ASConfig.getInstance().getStringValue("WEB_SERVICE_URI");
+    	this.WS_NAME = ASConfig.getInstance().getStringValue("WEB_SERVICE_NAME");
+    }
     
     public void start(AlertDistributor alertDistributor){
-        String address = "http://127.0.0.1:8081/";
+        String realUri = this.WS_URI+"/"+this.WS_NAME;
 
         try{
             ASAlertCollectorWs ws = new ASAlertCollectorWsImpl(alertDistributor);
@@ -36,7 +43,7 @@ public class ASWsMain {
             factory.setServiceClass(ASAlertCollectorWs.class);
             factory.setServiceBean(ws);
           
-            factory.setAddress(address + WSNAME);
+            factory.setAddress(realUri);
            
             Server server = factory.create();
             server.start();

@@ -12,6 +12,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.chinawiserv.fwk.session.CWSession;
+import com.chinawiserv.service.alertserver.ASConfig;
 import com.chinawiserv.service.alertserver.tcp.ASTcpServerSessionManager;
 import com.chinawiserv.service.alertserver.typedef.ASMsg;
 
@@ -21,9 +22,13 @@ public class AlertCacheCleaner extends TimerTask {
 	private BlockingQueue<ASMsg> cachedAlerts;
 	private ASTcpServerSessionManager sessionMgr;
 	
+	private int MSG_CACHE_TIME = 0;
+	
 	public AlertCacheCleaner(ASTcpServerSessionManager sessionMgr) {
 		this.sessionMgr = sessionMgr;
 		this.cachedAlerts = new LinkedBlockingQueue<ASMsg>();
+		
+		this.MSG_CACHE_TIME = ASConfig.getInstance().getIntValue("MSG_CACHE_TIME", 60);
 	}
 	
 	public void putAlert(ASMsg alert) throws InterruptedException {
@@ -71,7 +76,7 @@ public class AlertCacheCleaner extends TimerTask {
 	private void checkAndStoreBack(ASMsg alert) throws InterruptedException {
 		Date now = new Date();
 		long timeDiff = now.getTime() - alert.getTimeStamp().getTime();
-		if(timeDiff > 60 * 60 * 1000) {
+		if(timeDiff > this.MSG_CACHE_TIME * 60 * 1000) {
 			this.cachedAlerts.put(alert);
 		}
 	}
