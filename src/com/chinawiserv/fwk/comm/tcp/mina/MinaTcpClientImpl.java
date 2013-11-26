@@ -14,7 +14,6 @@ import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
 import com.chinawiserv.fwk.comm.tcp.CWTcpHandler;
 import com.chinawiserv.fwk.comm.tcp.CWTcpClientImpl;
-import com.chinawiserv.fwk.comm.tcp.mina.protocol.alertserver.ASCodecFilter;
 import com.chinawiserv.fwk.constant.CWCharset;
 import com.chinawiserv.fwk.constant.ETcpAppProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
@@ -74,21 +73,7 @@ public class MinaTcpClientImpl implements CWTcpClientImpl {
 		sessionConfig.setUseReadOperation(true);
 		 
 		DefaultIoFilterChainBuilder filterChain = connector.getFilterChain();
-		switch(_protocol) {
-		case P_TEXT_UTF8:
-			filterChain.addLast("codec", 
-					new ProtocolCodecFilter(
-							new TextLineCodecFactory(CWCharset.UTF_8.CHARSET, LineDelimiter.NUL, LineDelimiter.NUL
-					)));
-			break;
-		case P_ALERT_SERVER:
-			filterChain.addLast("codec", new ASCodecFilter());
-			break;
-		case P_BINARY:
-			break;
-		default:
-			break;
-		}
+		filterChain.addLast("codec", MinaUtil.pickProtocol(_protocol));
 		// loggingFilter should be the last one !!
 		filterChain.addLast("logging", new MinaCWLoggingFilter(MinaTcpClientImpl.class));
 		 

@@ -27,7 +27,7 @@ public class TestCWServer {
 		TestCWTcpServerHandler hnd = new TestCWTcpServerHandler();
 		server.setCWTcpHandler(hnd);
 		server.setCWSessionEventListener(hnd);
-		server.open(ETcpAppProtocol.P_TEXT_UTF8);
+		server.open(ETcpAppProtocol.P_TEXT_UTF8_NUL);
 	}
 
 }

@@ -165,6 +165,14 @@ public abstract class CWAbstractSession implements CWSession {
 	public Set<Object> getAttributeKeys() {
 		return attrMap.keySet();
 	} 
+	
+	/* (non-Javadoc)
+	 * @see com.chinawiserv.fwk.session.CWSession#clearAttributes()
+	 */
+	@Override
+	public void clearAttributes() {
+		attrMap.clear();
+	}
 
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#getName()

@@ -11,7 +11,7 @@ public class SecurityUtil {
 	
 	public final static String ALGORITHM_NAME_DES = "DES";
 	
-	public static byte[] desCrypto(String key, byte[] data) throws Exception {
+	public static byte[] desEncrypt(String key, byte[] data) throws Exception {
         SecureRandom random = new SecureRandom();  
         DESKeySpec desKey = new DESKeySpec(key.getBytes());  
         //创建一个密匙工厂，然后用它把DESKeySpec转换成  

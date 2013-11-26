@@ -21,7 +21,6 @@ import org.slf4j.LoggerFactory;
 
 import com.chinawiserv.fwk.comm.tcp.CWTcpHandler; 
 import com.chinawiserv.fwk.comm.tcp.CWTcpServerImpl; 
-import com.chinawiserv.fwk.comm.tcp.mina.protocol.alertserver.ASCodecFilter;
 import com.chinawiserv.fwk.constant.CWCharset;
 import com.chinawiserv.fwk.constant.ETcpAppProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
@@ -86,22 +85,7 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 //		sockConfig.setIdleTime(IdleStatus.BOTH_IDLE, Integer.valueOf( idleTimeout ) ); 
  
 		DefaultIoFilterChainBuilder filterChain = acceptor.getFilterChain();
-		switch(_protocol) {
-		case P_TEXT_UTF8:
-			filterChain.addLast("codec", 
-					new ProtocolCodecFilter(
-							new TextLineCodecFactory(CWCharset.UTF_8.CHARSET, LineDelimiter.NUL, LineDelimiter.NUL
-					)));
-			break;
-		case P_ALERT_SERVER:
-			filterChain.addLast("codec", new ASCodecFilter());
-			break;
-		case P_X_733:
-			break;
-		case P_BINARY:
-		default:
-			break;
-		}
+		filterChain.addLast("codec", MinaUtil.pickProtocol(_protocol));
 		// loggingFilter should be the last one !!
 		filterChain.addLast("logging", new MinaCWLoggingFilter(MinaTcpServerImpl.class));
 		

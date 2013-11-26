@@ -44,6 +44,8 @@ public interface CWSession {
  
     public Set<Object> getAttributeKeys();
     
+    public void clearAttributes();
+    
     public CWSessionEventListener getListener();
     
     public void setListener( CWSessionEventListener listener );

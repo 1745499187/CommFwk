@@ -34,7 +34,7 @@ public class CWTcpServer {
 	}
 	
 	public boolean open() {
-		this.protocol = ETcpAppProtocol.P_TEXT_UTF8;
+		this.protocol = ETcpAppProtocol.P_BINARY;
 		return impl.open(this.protocol);
 	}
 	

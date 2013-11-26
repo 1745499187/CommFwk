@@ -1,20 +1,18 @@
 package com.chinawiserv.service.alertserver.tcp;
 
+import java.nio.charset.CharacterCodingException;
 import java.util.UUID;
 
 import net.sf.json.JSONObject;
 
-import org.apache.mina.core.buffer.IoBuffer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chinawiserv.fwk.comm.tcp.CWTcpHandler;
-import com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession;
-import com.chinawiserv.fwk.comm.tcp.mina.protocol.alertserver.typedef.ASTcpMsg;
-import com.chinawiserv.fwk.constant.CWCharset;
 import com.chinawiserv.fwk.core.CWException;
 import com.chinawiserv.fwk.session.CWAbstractSessionEventListener;
 import com.chinawiserv.fwk.session.CWSession;
+import com.chinawiserv.service.alertserver.constant.ASSessionAttrKeyConstant;
+import com.chinawiserv.service.alertserver.typedef.ASMsg;
 
 public class ASTcpServerEventListener extends CWAbstractSessionEventListener {
 	private final static Logger logger = LoggerFactory.getLogger(ASTcpServerEventListener.class);
@@ -37,6 +35,13 @@ public class ASTcpServerEventListener extends CWAbstractSessionEventListener {
 	 */
 	@Override
 	public void sessionClosed(CWSession session) throws CWException {
+		String userName = (String)session.getAttribute(ASSessionAttrKeyConstant.SECURITY.USER_NAME);
+		if(userName != null) {
+			sessionMgr.remove(userName);
+		}
+		
+		// clean all attr at the last
+		session.clearAttributes();
 	}
 
 	/* (non-Javadoc)
@@ -49,20 +54,14 @@ public class ASTcpServerEventListener extends CWAbstractSessionEventListener {
         jsonObj.put("infotype", 256);
         jsonObj.put("randnum", randnum);
         
-        session.write(new ASTcpMsg(jsonObj.toString()));
+        ASMsg msg = new ASMsg(jsonObj.toString());
         
-        //ASTcpMsg reply = (ASTcpMsg)session.read();
-        //logger.debug("Got reply: "+reply);
-//        
-//        if(reply == null) {
-//        	logger.warn("got problem");
-//        	session.close();
-//        	return;
-//        }
-//        else {
-//        	reply.getContent();
-//        	sessionMgr.put("", session);
-//        }
+        try {
+        	session.setAttribute(ASSessionAttrKeyConstant.SECURITY.LOGIN_DES_KEY, randnum);
+			session.write(msg.toBuffer());
+		} catch (CharacterCodingException e) {
+			throw new CWException(e);
+		}
 	}
 
 	/* (non-Javadoc)

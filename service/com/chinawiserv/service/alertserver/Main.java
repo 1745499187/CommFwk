@@ -8,6 +8,7 @@ import com.chinawiserv.service.alertserver.tcp.ASTcpServerEventListener;
 import com.chinawiserv.service.alertserver.tcp.ASTcpServerHandler;
 import com.chinawiserv.service.alertserver.tcp.ASTcpServerSessionManager;
 import com.chinawiserv.service.alertserver.ws.ASWsMain;
+import com.chinawiserv.service.alertserver.ws.AlertDistributor;
 
 public class Main extends AbstractCommFwkService {
 
@@ -19,13 +20,24 @@ public class Main extends AbstractCommFwkService {
 	public void start() {
 		// start TCP server to wait client connect
 		CWTcpServer tcpServer = new CWTcpServer(5000);
+		
 		ASTcpServerSessionManager sessionMgr = new ASTcpServerSessionManager();
 		tcpServer.setCWSessionEventListener(new ASTcpServerEventListener(sessionMgr));
 		tcpServer.setCWTcpHandler(new ASTcpServerHandler(sessionMgr));
-		tcpServer.open(ETcpAppProtocol.P_ALERT_SERVER);
+		tcpServer.open(ETcpAppProtocol.P_BINARY);
 		
-//		ASWsMain wsMain = new ASWsMain();
-//		wsMain.start();
+		AlertDistributor alertDistributor = new AlertDistributor(sessionMgr);
+		new Thread(alertDistributor).start();
+		
+		try {
+			Thread.sleep(5 * 1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		ASWsMain wsMain = new ASWsMain();
+//		wsMain.start(alertDistributor);
+		wsMain.startTest(alertDistributor);
 	}
 
 	/**

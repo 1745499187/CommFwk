@@ -1,8 +1,9 @@
 package com.chinawiserv.fwk.constant;
 
 public enum ETcpAppProtocol {
-	P_TEXT_UTF8,
+	/** text which end with '\0' and charset=utf-8 */
+	P_TEXT_UTF8_NUL,
+	/** binary stream */
 	P_BINARY,
-	P_ALERT_SERVER,
 	P_X_733;
 }
