@@ -1,4 +1,4 @@
-package com.chinawiserv.service.test;
+package com.chinawiserv.test.service;
  
 import com.chinawiserv.fwk.comm.tcp.CWTcpClient;
 import com.chinawiserv.fwk.constant.ETcpAppProtocol;

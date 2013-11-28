@@ -1,4 +1,4 @@
-package com.chinawiserv.service.test;
+package com.chinawiserv.test.service;
 
 import java.util.Date;
 
