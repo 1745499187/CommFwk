@@ -47,6 +47,7 @@ public class ASTcpServerHandler implements CWTcpHandler {
 	 */
 	@Override
 	public void messageSent(CWTcpSocketSession session, Object message) {
+		logger.debug("Sent msg: " + message);
 	}
 
 	protected void decodeCWIoBuffer(CWTcpSocketSession session, CWIoBuffer in) throws CharacterCodingException, CWTcpException {

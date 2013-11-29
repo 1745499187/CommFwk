@@ -4,6 +4,8 @@ import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.chinawiserv.fwk.comm.tcp.buffer.CWIoBuffer;
 import com.chinawiserv.fwk.constant.CWCharset;
@@ -17,16 +19,18 @@ public class ASMsg extends CWPrintableDO {
 	
 	/** The content */
 	private String content;
+	private List<String> readers;
 	
 	private Date timeStamp;
 
 	public ASMsg() {
-		
+		this.readers = new LinkedList<String>();
 	}
 	
 	public ASMsg(String content) {
 		this.content = content;
 		this.timeStamp = new Date();
+		this.readers = new LinkedList<String>();
 	}
 	
 	/**
@@ -41,6 +45,22 @@ public class ASMsg extends CWPrintableDO {
 	 */
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	public List<String> getReaders() {
+		return this.readers;
+	}
+	
+	public void registerReader(String name) {
+		synchronized(this) {
+			this.readers.add(name);
+		}
+	}
+	
+	public void removeReader(String name) {
+		synchronized(this) {
+			this.readers.remove(name);
+		}
 	}
 	
 	/**

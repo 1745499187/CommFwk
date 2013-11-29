@@ -46,25 +46,22 @@ public class AlertCacheCleaner extends TimerTask {
 			try {
 				ASMsg alert = this.cachedAlerts.take();
 				
-				JSONObject jsonAlert = null;
-				jsonAlert = JSONObject.fromObject(alert.getContent());
-				JSONArray whoView = jsonAlert.getJSONArray("whoview");
-				
-				if (whoView == null || whoView.size() <= 0) {
+				if (alert.getReaders().size() <= 0) {
 					// no whoview
 					this.checkAndStoreBack(alert);
 					continue;
 				}
-				
-				for (int j = 0; j < whoView.size(); j++) {
-					String userName = whoView.getString(j);
-					CWSession session = this.sessionMgr.get(userName);
-
-					if (session == null) {
-						this.checkAndStoreBack(alert);
-						continue;
-					} else {
-						session.write(alert.toBuffer());
+				else {
+					for (String reader : alert.getReaders()) {
+						CWSession session = this.sessionMgr.get(reader);
+	
+						if (session == null) {
+							this.checkAndStoreBack(alert);
+							continue;
+						} else {
+							session.write(alert.toBuffer());
+							alert.removeReader(reader);
+						}
 					}
 				}
 			} catch(Exception e) {

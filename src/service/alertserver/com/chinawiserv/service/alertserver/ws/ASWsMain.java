@@ -84,7 +84,7 @@ class TestTimerTask extends TimerTask {
 			
 			JSONObject json = new JSONObject();
 	        JSONArray whoview = new JSONArray();
-	        whoview.add("zhangweibin");
+	        whoview.add("admin");
 	        whoview.add("zhouzhi");
 	        json.put("whoview", whoview);
 	        json.put("info", "this is a alert");

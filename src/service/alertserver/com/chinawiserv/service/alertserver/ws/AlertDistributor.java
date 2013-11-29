@@ -46,9 +46,17 @@ public class AlertDistributor implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
+			ASMsg alert = null;
 			try {
-				ASMsg alert = this.alertQueueRaw.take();
-
+				alert = this.alertQueueRaw.take();
+			} catch (InterruptedException e) {
+				logger.error("Error when take a alert", e);
+				
+			}
+			if(alert == null)
+				continue;
+			
+			try {
 				JSONObject jsonAlert = null;
 				jsonAlert = JSONObject.fromObject(alert.getContent());
 				JSONArray whoView = jsonAlert.getJSONArray("whoview");
@@ -59,19 +67,31 @@ public class AlertDistributor implements Runnable {
 					continue;
 				}
 				for (int i = 0; i < whoView.size(); i++) {
-					String userName = whoView.getString(i);
-					CWSession session = this.sessionMgr.get(userName);
+					alert.registerReader(whoView.getString(i));
+				}
+				
+				for(String reader : alert.getReaders()) {
+					CWSession session = this.sessionMgr.get(reader);
 
 					if (session == null) {
-						logger.info("User has not connected: " + userName);
-						this.alertCacheCleaner.putAlert(alert);
+						logger.info("User has not connected: " + reader);
 						continue;
 					} else {
 						session.write(alert.toBuffer());
+						alert.removeReader(reader);
 					}
 				}
 			} catch (Exception e) {
 				logger.error("Error when distribute alerts", e);
+			} finally {
+				try {
+					if(alert.getReaders().size() > 0) {
+						this.alertCacheCleaner.putAlert(alert);
+						logger.debug("Cached alert: " + alert);
+					}
+				} catch (InterruptedException e) {
+					logger.error("Error when put alert to cache", e);
+				}
 			}
 		}
 	}

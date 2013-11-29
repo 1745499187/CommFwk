@@ -26,7 +26,7 @@ public abstract class CWPrintableDO implements Serializable {
 				if(m.getParameterTypes().length == 0) {
 					Object result = null;
 					try {
-						result = m.invoke(this, null);
+						result = m.invoke(this);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
