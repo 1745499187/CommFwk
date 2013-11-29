@@ -36,5 +36,7 @@
 	<classpathentry kind="lib" path="lib/cxf/commons-collections-3.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/cxf/commons-beanutils-1.7.jar"/>
 	<classpathentry kind="lib" path="lib/cxf/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="lib/third/mysql-connector-java-5.1.25-bin.jar"/>
+	<classpathentry kind="lib" path="lib/cxf/commons-cli-1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

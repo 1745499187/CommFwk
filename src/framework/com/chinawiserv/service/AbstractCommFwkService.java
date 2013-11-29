@@ -7,7 +7,7 @@ public abstract class AbstractCommFwkService implements CommFwkService {
 
 	public AbstractCommFwkService(String name) {
 		if(name == null) {
-			this.name = AbstractCommFwkService.class.getSimpleName();
+			this.name = CommFwkService.class.getSimpleName();
 		}
 		else {
 			this.name = name;

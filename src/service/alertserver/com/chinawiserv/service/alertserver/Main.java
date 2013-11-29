@@ -1,5 +1,12 @@
 package com.chinawiserv.service.alertserver;
 
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+
 import com.chinawiserv.fwk.comm.tcp.CWTcpServer;
 import com.chinawiserv.fwk.constant.ETcpAppProtocol;
 import com.chinawiserv.service.AbstractCommFwkService;
@@ -11,17 +18,22 @@ import com.chinawiserv.service.alertserver.ws.ASWsMain;
 import com.chinawiserv.service.alertserver.ws.AlertDistributor;
 
 public class Main extends AbstractCommFwkService {
-
-	public Main(String name) {
+	private String configFile;
+	
+	public Main(String name, String cfg) {
 		super(name);
+		
+		this.configFile = cfg;
+		if(this.configFile == null || this.configFile.length() <= 0) {
+			this.configFile = "alertServer.properties";
+		}
 	}
 
 	@Override
 	public void start() {
 		// initial configuration
-		String configFile = "alertServer.properties";
-		ASConfig.init(configFile);
-				
+		ASConfig.init(this.configFile);
+		
 		// start TCP server to wait client connect
 		int listenPort = ASConfig.getInstance().getIntValue("ALERT_SERVER_PORT");
 		CWTcpServer tcpServer = new CWTcpServer(listenPort);
@@ -49,7 +61,26 @@ public class Main extends AbstractCommFwkService {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		CommFwkService svcInstance = new Main("AlertServer");
-		svcInstance.start();
+		Options options = new Options();
+		options.addOption("c", "conf", true, "specialfy the configuration file");
+		
+		CommandLineParser parser = new BasicParser();
+		
+		try {
+			CommandLine cl = parser.parse(options, args);
+
+			if(cl.hasOption("c")) {
+				CommFwkService svcInstance = new Main("AlertServer", cl.getOptionValue("c"));
+				svcInstance.start();
+			}
+			else {
+				HelpFormatter formatter = new HelpFormatter();
+				formatter.printHelp(Main.class.getSimpleName(), options );
+				System.exit(1);
+			}
+		} catch (ParseException e) {
+			System.out.println("Parse argments fail: " + e.getMessage());
+		}
+		
 	}
 }

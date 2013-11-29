@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="CommFwk" default="all" basedir=".">
+	<property name="version">1.0</property>
+	
+	<property name="srcDir">${basedir}/src</property>
+	<property name="srcFwkDir">${srcDir}/framework</property>
+	<property name="srcSvcDir">${srcDir}/service</property>
+	
+	<property name="libDir">${basedir}/lib</property>
+	
+	<property name="confDir">${basedir}/conf</property>
+	<property name="confFwkDir">${confDir}/framework</property>
+	<property name="confSvcDir">${confDir}/service</property>
+	
+	<property name="scriptDir">${basedir}/script</property>
+	<property name="scriptFwkDir">${scriptDir}/framework</property>
+	<property name="scriptSvcDir">${scriptDir}/service</property>
+	
+	<property name="outDir">${basedir}/out</property>
+	<property name="buildDir">${outDir}/build</property>
+	<property name="buildFwkDir">${buildDir}/framework</property>
+	<property name="buildSvcDir">${buildDir}/service</property>
+	
+	<property name="distDir">${outDir}/dist</property>
+	<property name="distFwkDir">${distDir}/framework</property>
+	<property name="distSvcDir">${distDir}/service</property>
+	
+	<target name="all" depends="svc.alertServer">
+		<description>
+			All targets, including framework and all services
+		</description>
+	</target>
+	
+	<target name="init" depends="clean">
+		<mkdir dir="${outDir}" />
+	</target>
+	
+	<target name="clean">
+		<delete dir="${outDir}" />
+	</target>
+	
+	<!-- Compile and Distribute the framework -->
+	<target name="commFwk" depends="init">
+		<description>
+			Build and dist the framework
+		</description>
+		
+		<local name="componenetName" />
+		<local name="thisTargetFile" />
+		<local name="thisMainClass" />
+		<local name="thisSrc" />
+		<local name="thisConf" />
+		<local name="thisScript" />
+		<local name="thisBuild" />
+		<local name="thisDist" />
+		
+		<property name="componenetName">framework</property>
+		
+		<property name="thisTargetFile">comm-fwk-${version}.jar</property>
+		
+		<property name="thisSrc">${srcFwkDir}</property>
+		<property name="thisBuild">${buildFwkDir}</property>
+		<property name="thisDist">${distFwkDir}</property>
+		
+		<mkdir dir="${thisBuild}" />
+		<mkdir dir="${thisDist}" />
+		
+		<javac srcdir="${thisSrc}" destdir="${thisBuild}" debug="true" debuglevel="source,lines,vars">
+			<classpath>
+				<fileset dir="${libDir}/third" includes="*.jar" />
+			</classpath>
+		</javac>
+		
+		<jar destfile="${thisDist}/${thisTargetFile}" basedir="${thisBuild}" />
+		
+		<mkdir dir="${thisDist}/bin"/>
+		<mkdir dir="${thisDist}/lib"/>
+		
+		<copy todir="${thisDist}/lib">
+			<fileset dir="${libDir}/third" includes="*.jar" />
+		</copy>
+		
+		<move file="${thisDist}/${thisTargetFile}" todir="${thisDist}/bin" />
+	</target>
+	
+	<!-- Service Task: AlertServer -->
+	<target name="svc.alertServer" depends="commFwk">
+		<description>
+			Build and dist the service: AlertServer
+		</description>
+		
+		<!-- local peroperties (reuse the same name) -->
+		<local name="componenetName" />
+		<local name="thisTargetFile" />
+		<local name="thisMainClass" />
+		<local name="thisSrc" />
+		<local name="thisConf" />
+		<local name="thisScript" />
+		<local name="thisBuild" />
+		<local name="thisDist" />
+		
+		<!-- define component name -->
+		<property name="componenetName">alertserver</property>
+		
+		<!-- define component properties -->
+		<property name="thisTargetFile">${componenetName}.jar</property>
+		<property name="thisMainClass">com.chinawiserv.service.alertserver.Main</property>
+		
+		<property name="thisSrc">${srcSvcDir}/${componenetName}</property>
+		<property name="thisConf">${confSvcDir}/${componenetName}</property>
+		<property name="thisScript">${scriptSvcDir}/${componenetName}</property>
+		<property name="thisBuild">${buildSvcDir}/${componenetName}</property>
+		<property name="thisDist">${distSvcDir}/${componenetName}</property>
+		
+		<!-- mkdirs -->
+		<mkdir dir="${thisBuild}" />
+		<mkdir dir="${thisDist}" />
+		<mkdir dir="${thisDist}/lib"/>
+		<!-- merged into "bin" for convenience
+		<mkdir dir="${thisDist}/conf"/> 
+		-->
+		<mkdir dir="${thisDist}/bin"/>
+		
+		<!-- compile -->
+		<javac srcdir="${thisSrc}" destdir="${thisBuild}" debug="true" debuglevel="source,lines,vars">
+			<classpath>
+				<fileset dir="${distFwkDir}/bin" includes="*.jar" />
+				<fileset dir="${libDir}/third" includes="*.jar" />
+				<fileset dir="${libDir}/cxf" includes="*.jar" />
+			</classpath>
+		</javac>
+		
+		<!-- make jar file -->
+		<jar destfile="${thisDist}/${thisTargetFile}" basedir="${thisBuild}">
+			<!--
+			<manifest>
+		    	<attribute name="Main-class" value="${thisMainClass}"/>
+            </manifest>
+            -->
+		</jar>
+		
+		<!-- copy libs to dist folder -->
+		<copy todir="${thisDist}/lib">
+			<fileset dir="${libDir}/cxf" includes="*.jar" />
+		</copy>
+		
+		<!-- move the compiled jar file to bin -->
+		<move file="${thisDist}/${thisTargetFile}" todir="${thisDist}/bin" />
+		
+		<!-- copy config files -->
+		<copy todir="${thisDist}/bin">
+			<fileset dir="${thisConf}" includes="*.*" />
+		</copy>
+		
+		<!-- copy scripts -->
+		<copy todir="${thisDist}/bin">
+			<fileset dir="${thisScript}" includes="*.*" />
+		</copy>
+	</target>
+</project>
