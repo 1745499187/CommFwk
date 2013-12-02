@@ -6,6 +6,8 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.chinawiserv.fwk.comm.tcp.CWTcpServer;
 import com.chinawiserv.fwk.constant.ETcpAppProtocol;
@@ -18,6 +20,8 @@ import com.chinawiserv.service.alertserver.ws.ASWsMain;
 import com.chinawiserv.service.alertserver.ws.AlertDistributor;
 
 public class Main extends AbstractCommFwkService {
+	private final static Logger logger = LoggerFactory.getLogger(Main.class);
+	
 	private String configFile;
 	
 	public Main(String name, String cfg) {
@@ -46,15 +50,13 @@ public class Main extends AbstractCommFwkService {
 		AlertDistributor alertDistributor = new AlertDistributor(sessionMgr);
 		new Thread(alertDistributor).start();
 		
-		try {
-			Thread.sleep(5 * 1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
 		ASWsMain wsMain = new ASWsMain();
 		wsMain.start(alertDistributor);
 //		wsMain.startTest(alertDistributor);
+		
+		String succStr = "AlertServer started successfully";
+		System.out.println(succStr);
+		logger.info(succStr);
 	}
 
 	/**

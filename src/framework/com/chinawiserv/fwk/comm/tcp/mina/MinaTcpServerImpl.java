@@ -104,7 +104,7 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 			return false;
 		}
 		
-		logger.info("Server started at ["+this.ipAddr + ":" + this.port+"]");
+		logger.info("Started listen on ["+this.ipAddr + ":" + this.port+"]");
 		
 		return true;
 	}

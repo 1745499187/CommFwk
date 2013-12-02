@@ -48,7 +48,7 @@ public class ASWsMain {
             Server server = factory.create();
             server.start();
          
-            logger.info("Webservice started successfully!");
+            logger.info("WebService started at: " + realUri);
             
         }catch(Exception e){
             e.printStackTrace();
@@ -59,6 +59,8 @@ public class ASWsMain {
     public void startTest(AlertDistributor alertDistributor){
         try{
             logger.info("Webservice started successfully!");
+            
+            Thread.sleep(5 * 1000);
             
             Timer timer = new Timer();
             timer.schedule(new TestTimerTask(alertDistributor), 0, 1000);
