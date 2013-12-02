@@ -8,6 +8,8 @@
 	<property name="srcSvcDir">${srcDir}/service</property>
 	
 	<property name="libDir">${basedir}/lib</property>
+	<property name="libFwkDir">${libDir}/framework</property>
+	<property name="libSvcDir">${libDir}/service</property>
 	
 	<property name="confDir">${basedir}/conf</property>
 	<property name="confFwkDir">${confDir}/framework</property>
@@ -16,6 +18,10 @@
 	<property name="scriptDir">${basedir}/script</property>
 	<property name="scriptFwkDir">${scriptDir}/framework</property>
 	<property name="scriptSvcDir">${scriptDir}/service</property>
+	
+	<property name="docDir">${basedir}/doc</property>
+	<property name="docFwkDir">${docDir}/framework</property>
+	<property name="docSvcDir">${docDir}/service</property>
 	
 	<property name="outDir">${basedir}/out</property>
 	<property name="buildDir">${outDir}/build</property>
@@ -52,6 +58,8 @@
 		<local name="thisSrc" />
 		<local name="thisConf" />
 		<local name="thisScript" />
+		<local name="thisLib" />
+		<local name="thisDoc" />
 		<local name="thisBuild" />
 		<local name="thisDist" />
 		
@@ -60,6 +68,8 @@
 		<property name="thisTargetFile">comm-fwk-${version}.jar</property>
 		
 		<property name="thisSrc">${srcFwkDir}</property>
+		<property name="thisLib">${libFwkDir}</property>
+		<property name="thisDoc">${docFwkDir}</property>
 		<property name="thisBuild">${buildFwkDir}</property>
 		<property name="thisDist">${distFwkDir}</property>
 		
@@ -68,7 +78,7 @@
 		
 		<javac srcdir="${thisSrc}" destdir="${thisBuild}" debug="true" debuglevel="source,lines,vars">
 			<classpath>
-				<fileset dir="${libDir}/third" includes="*.jar" />
+				<fileset dir="${libFwkDir}" includes="*.jar" />
 			</classpath>
 		</javac>
 		
@@ -76,12 +86,17 @@
 		
 		<mkdir dir="${thisDist}/bin"/>
 		<mkdir dir="${thisDist}/lib"/>
+		<mkdir dir="${thisDist}/doc"/>
 		
 		<copy todir="${thisDist}/lib">
-			<fileset dir="${libDir}/third" includes="*.jar" />
+			<fileset dir="${thisLib}" includes="*.jar" />
 		</copy>
 		
 		<move file="${thisDist}/${thisTargetFile}" todir="${thisDist}/bin" />
+		
+		<copy todir="${thisDist}/doc">
+			<fileset dir="${thisDoc}" includes="*.*" />
+		</copy>
 	</target>
 	
 	<!-- Service Task: AlertServer -->
@@ -97,6 +112,8 @@
 		<local name="thisSrc" />
 		<local name="thisConf" />
 		<local name="thisScript" />
+		<local name="thisLib" />
+		<local name="thisDoc" />
 		<local name="thisBuild" />
 		<local name="thisDist" />
 		
@@ -110,6 +127,8 @@
 		<property name="thisSrc">${srcSvcDir}/${componenetName}</property>
 		<property name="thisConf">${confSvcDir}/${componenetName}</property>
 		<property name="thisScript">${scriptSvcDir}/${componenetName}</property>
+		<property name="thisLib">${libSvcDir}/${componenetName}</property>
+		<property name="thisDoc">${docSvcDir}/${componenetName}</property>
 		<property name="thisBuild">${buildSvcDir}/${componenetName}</property>
 		<property name="thisDist">${distSvcDir}/${componenetName}</property>
 		
@@ -121,13 +140,14 @@
 		<mkdir dir="${thisDist}/conf"/> 
 		-->
 		<mkdir dir="${thisDist}/bin"/>
+		<mkdir dir="${thisDist}/doc"/>
 		
 		<!-- compile -->
 		<javac srcdir="${thisSrc}" destdir="${thisBuild}" debug="true" debuglevel="source,lines,vars">
 			<classpath>
 				<fileset dir="${distFwkDir}/bin" includes="*.jar" />
-				<fileset dir="${libDir}/third" includes="*.jar" />
-				<fileset dir="${libDir}/cxf" includes="*.jar" />
+				<fileset dir="${libFwkDir}" includes="*.jar" />
+				<fileset dir="${libSvcDir}/${componenetName}" includes="*.jar" />
 			</classpath>
 		</javac>
 		
@@ -142,7 +162,7 @@
 		
 		<!-- copy libs to dist folder -->
 		<copy todir="${thisDist}/lib">
-			<fileset dir="${libDir}/cxf" includes="*.jar" />
+			<fileset dir="${thisLib}" includes="*.jar" />
 		</copy>
 		
 		<!-- move the compiled jar file to bin -->
@@ -156,6 +176,11 @@
 		<!-- copy scripts -->
 		<copy todir="${thisDist}/bin">
 			<fileset dir="${thisScript}" includes="*.*" />
+		</copy>
+		
+		<!-- copy docs -->
+		<copy todir="${thisDist}/doc">
+			<fileset dir="${thisDoc}" includes="*.*" />
 		</copy>
 	</target>
 </project>
