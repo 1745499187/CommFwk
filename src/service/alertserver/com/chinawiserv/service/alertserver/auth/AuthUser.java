@@ -20,14 +20,14 @@ public class AuthUser {
 		String dbPassword =  MD5.digest(password);
 		
 //		String sql = "select count(1) as cnt from User_ where screenName=? and password_=? and active_ in(1)";
-		String sql = ASConfig.getInstance().getStringValue("DB_AUTH_SQL");
+		String sql = ASConfig.getInstance().getStringValue("DB_AUTH_VERIFY_SQL");
 		
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
 			Class.forName(ASConfig.getInstance().getStringValue("DB_DRIVER"));
-			conn = DriverManager.getConnection(ASConfig.getInstance().getStringValue("DB_URI"), 
+			conn = DriverManager.getConnection(ASConfig.getInstance().getStringValue("DB_URL"), 
 					ASConfig.getInstance().getStringValue("DB_USER"), 
 					ASConfig.getInstance().getStringValue("DB_PASSWORD"));
 			ps = conn.prepareStatement(sql);

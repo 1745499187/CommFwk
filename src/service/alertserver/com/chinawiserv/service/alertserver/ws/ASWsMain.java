@@ -29,7 +29,7 @@ public class ASWsMain {
     private String WS_NAME = null;
     
     public ASWsMain() {
-    	this.WS_URI = ASConfig.getInstance().getStringValue("WEB_SERVICE_URI");
+    	this.WS_URI = ASConfig.getInstance().getStringValue("WEB_SERVICE_URL");
     	this.WS_NAME = ASConfig.getInstance().getStringValue("WEB_SERVICE_NAME");
     }
     

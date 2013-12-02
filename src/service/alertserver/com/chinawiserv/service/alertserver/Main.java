@@ -53,8 +53,8 @@ public class Main extends AbstractCommFwkService {
 		}
 		
 		ASWsMain wsMain = new ASWsMain();
-//		wsMain.start(alertDistributor);
-		wsMain.startTest(alertDistributor);
+		wsMain.start(alertDistributor);
+//		wsMain.startTest(alertDistributor);
 	}
 
 	/**
