@@ -137,10 +137,10 @@ public class TestCWTcpClientHandler implements CWTcpHandler {
 			Integer infoType = (Integer)json.get("infotype");
 			String randnum = (String)json.get("randnum");
 	
-//	        String user = "weibin";
-//	        String password = "weibin";
-	        String user = "admin";
-	        String password = "admin";
+	        String user = "guest";
+	        String password = "guest";
+//	        String user = "admin";
+//	        String password = "admin";
 	        String content = user + ":" + password;
 	        byte[] decrypt = SecurityUtil.desEncrypt(randnum, content.getBytes());
 	        String decryptContent = StringUtil.bytesToHexString(decrypt);

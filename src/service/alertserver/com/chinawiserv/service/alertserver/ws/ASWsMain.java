@@ -22,7 +22,10 @@ public class ASWsMain {
     private String WS_NAME = null;
     
     public ASWsMain() {
-    	this.WS_URI = ASConfig.getInstance().getStringValue("WEB_SERVICE_URL");
+    	String wsIp = ASConfig.getInstance().getStringValue("WEB_SERVICE_IP", "0.0.0.0");
+    	// if port is missing, use 80 as default
+    	String wsPort = ASConfig.getInstance().getStringValue("WEB_SERVICE_PORT");
+    	this.WS_URI = "http://" + wsIp + ( wsPort == null ? "" : (":"+wsPort) );
     	this.WS_NAME = ASConfig.getInstance().getStringValue("WEB_SERVICE_NAME");
     }
     
