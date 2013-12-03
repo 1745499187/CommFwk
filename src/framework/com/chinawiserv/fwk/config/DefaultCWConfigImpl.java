@@ -50,6 +50,7 @@ public class DefaultCWConfigImpl implements CWConfig {
 	 * @see com.chinawiserv.fwk.config.CWConfig#getIntValue(java.lang.String)
 	 */
 	@Override
+	@Deprecated
 	public int getIntValue(String key) {
 		int ret = 0;
 		String val = this.configHolder.getProperty(key);
@@ -76,4 +77,44 @@ public class DefaultCWConfigImpl implements CWConfig {
 		return ret;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.chinawiserv.fwk.config.CWConfig#getBoolValue(java.lang.String)
+	 */
+	@Override
+	public boolean getBoolValue(String key) {
+		boolean ret = false;
+		
+		String val = this.configHolder.getProperty(key);
+		if("true".equalsIgnoreCase(val)) {
+			ret = true;
+		}
+		else if("yes".equals(val)) {
+			ret = true;
+		}
+		
+		return ret;
+	}
+	
+	/* (non-Javadoc)
+	 * @see com.chinawiserv.fwk.config.CWConfig#getBoolValue(java.lang.String, boolean)
+	 */
+	@Override
+	public boolean getBoolValue(String key, boolean defaultValue) {
+		boolean ret = false;
+		
+		String val = this.configHolder.getProperty(key);
+		if(val == null) {
+			ret = defaultValue;
+		}
+		else {
+			if("true".equalsIgnoreCase(val)) {
+				ret = true;
+			}
+			else if("yes".equals(val)) {
+				ret = true;
+			}
+		}
+		
+		return ret;
+	}
 }

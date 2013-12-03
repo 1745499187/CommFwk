@@ -1,6 +1,5 @@
 package com.chinawiserv.service.alertserver.auth;
 
-import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,7 +16,10 @@ public class AuthUser {
 	private static final Logger logger = LoggerFactory.getLogger(AuthUser.class);
 
 	public boolean auth(String username, String password) {
-		String dbPassword =  MD5.digest(password);
+		String dbPassword = password;
+		if(ASConfig.getInstance().getBoolValue("DB_AUTH_PWD_IS_DIGEST_BY_MD5")) {
+			dbPassword = MD5.digest(password);
+		}
 		
 //		String sql = "select count(1) as cnt from User_ where screenName=? and password_=? and active_ in(1)";
 		String sql = ASConfig.getInstance().getStringValue("DB_AUTH_VERIFY_SQL");
