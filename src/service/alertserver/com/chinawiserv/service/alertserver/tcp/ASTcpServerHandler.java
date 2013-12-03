@@ -154,7 +154,7 @@ public class ASTcpServerHandler implements CWTcpHandler {
 				logger.info("Client ["+username+"] has connected");
 			}
 			else {
-				logger.warn("Client ["+username+"] has tried to connect, but authorize failed");
+				logger.warn("Client ["+username+"] has tried to connect with invalid username/password");
 				
 				session.setAttribute(ASSessionAttrKeyConstant.SECURITY.LOGIN_STATUS, EASLoginStatus.LOGIN_FAIL);
 				session.close();

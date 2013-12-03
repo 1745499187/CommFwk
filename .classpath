@@ -2,7 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src/framework"/>
 	<classpathentry kind="src" path="src/service/alertserver"/>
-	<classpathentry kind="src" path="src/test"/>
+	<classpathentry kind="src" path="test/framework"/>
+	<classpathentry kind="src" path="test/service/alertserver"/>
 	<classpathentry kind="src" path="conf"/>
 	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>

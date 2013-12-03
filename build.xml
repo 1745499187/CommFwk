@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="CommFwk" default="all" basedir=".">
-	<property name="version">1.0</property>
+	<property name="version" value="1.0" />
 	
-	<property name="srcDir">${basedir}/src</property>
-	<property name="srcFwkDir">${srcDir}/framework</property>
-	<property name="srcSvcDir">${srcDir}/service</property>
+	<property name="srcDir" value="${basedir}/src" />
+	<property name="srcFwkDir" value="${srcDir}/framework" />
+	<property name="srcSvcDir" value="${srcDir}/service" />
 	
-	<property name="libDir">${basedir}/lib</property>
-	<property name="libFwkDir">${libDir}/framework</property>
-	<property name="libSvcDir">${libDir}/service</property>
+	<property name="libDir" value="${basedir}/lib" />
+	<property name="libFwkDir" value="${libDir}/framework" />
+	<property name="libSvcDir" value="${libDir}/service" />
 	
-	<property name="confDir">${basedir}/conf</property>
-	<property name="confFwkDir">${confDir}/framework</property>
-	<property name="confSvcDir">${confDir}/service</property>
+	<property name="confDir" value="${basedir}/conf" />
+	<property name="confFwkDir" value="${confDir}/framework" />
+	<property name="confSvcDir" value="${confDir}/service" />
 	
-	<property name="scriptDir">${basedir}/script</property>
-	<property name="scriptFwkDir">${scriptDir}/framework</property>
-	<property name="scriptSvcDir">${scriptDir}/service</property>
+	<property name="scriptDir" value="${basedir}/script" />
+	<property name="scriptFwkDir" value="${scriptDir}/framework" />
+	<property name="scriptSvcDir" value="${scriptDir}/service" />
 	
-	<property name="docDir">${basedir}/doc</property>
-	<property name="docFwkDir">${docDir}/framework</property>
-	<property name="docSvcDir">${docDir}/service</property>
+	<property name="docDir" value="${basedir}/doc" />
+	<property name="docFwkDir" value="${docDir}/framework" />
+	<property name="docSvcDir" value="${docDir}/service" />
 	
-	<property name="outDir">${basedir}/out</property>
-	<property name="buildDir">${outDir}/build</property>
-	<property name="buildFwkDir">${buildDir}/framework</property>
-	<property name="buildSvcDir">${buildDir}/service</property>
+	<property name="outDir" value="${basedir}/out" />
+	<property name="buildDir" value="${outDir}/build" />
+	<property name="buildFwkDir" value="${buildDir}/framework" />
+	<property name="buildSvcDir" value="${buildDir}/service" />
 	
-	<property name="distDir">${outDir}/dist</property>
-	<property name="distFwkDir">${distDir}/framework</property>
-	<property name="distSvcDir">${distDir}/service</property>
+	<property name="distDir" value="${outDir}/dist" />
+	<property name="distFwkDir" value="${distDir}/framework" />
+	<property name="distSvcDir" value="${distDir}/service" />
 	
 	<target name="all" depends="svc.alertServer">
 		<description>
@@ -63,15 +63,15 @@
 		<local name="thisBuild" />
 		<local name="thisDist" />
 		
-		<property name="componenetName">framework</property>
+		<property name="componenetName" value="framework" />
 		
-		<property name="thisTargetFile">comm-fwk-${version}.jar</property>
+		<property name="thisTargetFile" value="comm-fwk-${version}.jar" />
 		
-		<property name="thisSrc">${srcFwkDir}</property>
-		<property name="thisLib">${libFwkDir}</property>
-		<property name="thisDoc">${docFwkDir}</property>
-		<property name="thisBuild">${buildFwkDir}</property>
-		<property name="thisDist">${distFwkDir}</property>
+		<property name="thisSrc" value="${srcFwkDir}" />
+		<property name="thisLib" value="${libFwkDir}" />
+		<property name="thisDoc" value="${docFwkDir}" />
+		<property name="thisBuild" value="${buildFwkDir}" />
+		<property name="thisDist" value="${distFwkDir}" />
 		
 		<mkdir dir="${thisBuild}" />
 		<mkdir dir="${thisDist}" />
@@ -118,19 +118,19 @@
 		<local name="thisDist" />
 		
 		<!-- define component name -->
-		<property name="componenetName">alertserver</property>
+		<property name="componenetName" value="alertserver" />
 		
 		<!-- define component properties -->
-		<property name="thisTargetFile">${componenetName}.jar</property>
-		<property name="thisMainClass">com.chinawiserv.service.alertserver.Main</property>
+		<property name="thisTargetFile" value="${componenetName}.jar" />
+		<property name="thisMainClass" value="com.chinawiserv.service.alertserver.Main" />
 		
-		<property name="thisSrc">${srcSvcDir}/${componenetName}</property>
-		<property name="thisConf">${confSvcDir}/${componenetName}</property>
-		<property name="thisScript">${scriptSvcDir}/${componenetName}</property>
-		<property name="thisLib">${libSvcDir}/${componenetName}</property>
-		<property name="thisDoc">${docSvcDir}/${componenetName}</property>
-		<property name="thisBuild">${buildSvcDir}/${componenetName}</property>
-		<property name="thisDist">${distSvcDir}/${componenetName}</property>
+		<property name="thisSrc" value="${srcSvcDir}/${componenetName}" />
+		<property name="thisConf" value="${confSvcDir}/${componenetName}" />
+		<property name="thisScript" value="${scriptSvcDir}/${componenetName}" />
+		<property name="thisLib" value="${libSvcDir}/${componenetName}" />
+		<property name="thisDoc" value="${docSvcDir}/${componenetName}" />
+		<property name="thisBuild" value="${buildSvcDir}/${componenetName}" />
+		<property name="thisDist" value="${distSvcDir}/${componenetName}" />
 		
 		<!-- mkdirs -->
 		<mkdir dir="${thisBuild}" />

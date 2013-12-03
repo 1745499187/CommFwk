@@ -1,4 +1,4 @@
-package com.chinawiserv.test.service;
+package test.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +19,8 @@ import com.chinawiserv.fwk.session.CWSession;
  * @version 1.0
  * @author FWK Team
  */
-public class TestCWTcpClientSessionEventListener extends CWAbstractSessionEventListener {
-	private final static Logger logger = LoggerFactory.getLogger(TestCWTcpClientSessionEventListener.class);
+public class TestClientSessionEventListener extends CWAbstractSessionEventListener {
+	private final static Logger logger = LoggerFactory.getLogger(TestClientSessionEventListener.class);
 	
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#sessionCreated(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession)

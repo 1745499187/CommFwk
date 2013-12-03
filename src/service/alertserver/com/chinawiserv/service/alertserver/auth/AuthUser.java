@@ -43,7 +43,7 @@ public class AuthUser {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Error when query database, please check db configurations", e);
 		} finally {
 			try {
 				if(rs != null) {
@@ -64,8 +64,6 @@ public class AuthUser {
 	}
 
 	public static void main(String args[]) {
-		// org.jasig.cas.authentication.handler.Md5PasswordEncoder e = new
-		// org.jasig.cas.authentication.handler.Md5PasswordEncoder();
 		ASConfig.init("alertServer.properties");
 		AuthUser authUser = new AuthUser();
 		System.out.println(authUser.auth("admin", "admin"));

@@ -91,7 +91,6 @@ public class AlertDistributor implements Runnable {
 				try {
 					if(alert.getReaders().size() > 0) {
 						this.alertCacheCleaner.putAlert(alert);
-						logger.debug("Cached alert: " + alert);
 					}
 				} catch (InterruptedException e) {
 					logger.error("Error when put alert to cache", e);

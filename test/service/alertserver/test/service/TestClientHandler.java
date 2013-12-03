@@ -1,4 +1,4 @@
-package com.chinawiserv.test.service;
+package test.service;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.CharacterCodingException;
@@ -18,14 +18,22 @@ import com.chinawiserv.service.alertserver.typedef.ASMsg;
 import com.chinawiserv.service.alertserver.util.SecurityUtil;
 import com.chinawiserv.service.alertserver.util.StringUtil;
 
-public class TestCWTcpClientHandler implements CWTcpHandler {
-	private final static Logger logger = LoggerFactory.getLogger(TestCWTcpClientHandler.class);
+public class TestClientHandler implements CWTcpHandler {
+	private final static Logger logger = LoggerFactory.getLogger(TestClientHandler.class);
 	
 	private final static String ATT_DECODE_STATE = "status.ds";
 	private final static String ATT_PARTIAL_MSG = "status.pm";
 	private final static String ATT_MSG_LENGTH = "status.ml";
 	
 	private final static String LOGIN_STATUS = "status.login";
+	
+	private String username;
+	private String password;
+	
+	public TestClientHandler(String user, String pwd) {
+		this.username = user;
+		this.password = pwd;
+	}
 	
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#messageReceived(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Object)
@@ -110,9 +118,8 @@ public class TestCWTcpClientHandler implements CWTcpHandler {
 				
 				try{
 					// start message decoding
-					String str = buf.getString(msgLen, CWCharset.GBK.DECODER);
-					ASMsg msg = new ASMsg(str);
-					this.processASTcpMsg(session, msg);
+					String msg = buf.getString(msgLen, CWCharset.GBK.DECODER);
+					this.processMsg(session, msg);
 					
 				} catch(Exception e) {
 					throw new CWTcpException("Decode msg fail", e);
@@ -128,28 +135,26 @@ public class TestCWTcpClientHandler implements CWTcpHandler {
 		}
 	}
 	
-	protected void processASTcpMsg(CWTcpSocketSession session, ASMsg msg) throws Exception {
+	protected void processMsg(CWTcpSocketSession session, String msg) throws Exception {
 		logger.debug("Start process msg: " + msg);
 		
 		Boolean isLogin = (Boolean)session.getAttribute(LOGIN_STATUS);
 		if(isLogin == null || isLogin == false) {
-			JSONObject json = JSONObject.fromObject(msg.getContent());
+			JSONObject json = JSONObject.fromObject(msg);
 			Integer infoType = (Integer)json.get("infotype");
 			String randnum = (String)json.get("randnum");
 	
-	        String user = "guest";
-	        String password = "guest";
-//	        String user = "admin";
-//	        String password = "admin";
-	        String content = user + ":" + password;
+	        String content = this.username + ":" + this.password;
 	        byte[] decrypt = SecurityUtil.desEncrypt(randnum, content.getBytes());
 	        String decryptContent = StringUtil.bytesToHexString(decrypt);
 	        
 	        session.setAttribute(LOGIN_STATUS, true);
 	        session.write(new ASMsg(decryptContent).toBuffer());
+	        
+	        return;
 		}
 		else {
-			
+			logger.debug("Received alert: " + msg);
 		}
 	}
 	

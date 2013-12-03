@@ -31,6 +31,7 @@ public class AlertCacheCleaner extends TimerTask {
 	
 	public void putAlert(ASMsg alert) throws InterruptedException {
 		this.cachedAlerts.put(alert);
+		logger.debug("Cached alert: " + alert);
 	}
 	
 	public int getCacheSize() {
@@ -83,6 +84,9 @@ public class AlertCacheCleaner extends TimerTask {
 		long timeDiff = now.getTime() - alert.getTimeStamp().getTime();
 		if(timeDiff < this.MSG_CACHE_TIME * 60 * 1000) {
 			this.cachedAlerts.put(alert);
+		}
+		else {
+			logger.debug("Alert is expired, system has dropped. Alert: " + alert);
 		}
 	}
 }
