@@ -1,9 +1,5 @@
 package com.chinawiserv.fwk.comm.tcp;
 
-import org.apache.mina.core.session.IoSession;
-
-import com.chinawiserv.fwk.session.CWAbstractSession;
-
 /**
  * <li>文件名称: CWTcpSocketSessionImpl.java</li>
  * <li>文件描述: 本类描述</li>

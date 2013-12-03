@@ -1,11 +1,6 @@
 
 package com.chinawiserv.service.alertserver.ws;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxws.JaxWsServerFactoryBean;
@@ -13,8 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.chinawiserv.service.alertserver.ASConfig;
-import com.chinawiserv.service.alertserver.tcp.ASTcpServerSessionManager;
-import com.chinawiserv.service.alertserver.typedef.ASMsg;
 
 /**
  * <p>HTML style description</p>
@@ -53,49 +46,5 @@ public class ASWsMain {
         }catch(Exception e){
             e.printStackTrace();
         }
-        
     }
-    
-    public void startTest(AlertDistributor alertDistributor){
-        try{
-            logger.info("Webservice started successfully!");
-            
-            Thread.sleep(5 * 1000);
-            
-            Timer timer = new Timer();
-            timer.schedule(new TestTimerTask(alertDistributor), 0, 1000);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-    }
-}
-
-class TestTimerTask extends TimerTask {
-	private AlertDistributor alertDistributor;
-	private int count = 0;
-	
-	public TestTimerTask(AlertDistributor alertDistributor) {
-		this.alertDistributor = alertDistributor;
-	}
-	
-	@Override
-	public void run() {
-		try {
-			count ++;
-			
-			JSONObject json = new JSONObject();
-	        JSONArray whoview = new JSONArray();
-	        whoview.add("admin");
-	        whoview.add("zhouzhi");
-	        json.put("whoview", whoview);
-	        json.put("info", "this is a alert");
-	        json.put("count", count);
-	        
-	        ASMsg alert = new ASMsg(json.toString());
-	        this.alertDistributor.putAlert(alert);
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-	}
 }

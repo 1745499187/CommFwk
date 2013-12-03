@@ -31,11 +31,13 @@ import java.nio.ByteOrder;
  */
 public class CWSimpleBufferAllocator implements CWIoBufferAllocator {
 
-    public CWIoBuffer allocate(int capacity, boolean direct) {
+    @Override
+	public CWIoBuffer allocate(int capacity, boolean direct) {
         return wrap(allocateNioBuffer(capacity, direct));
     }
 
-    public ByteBuffer allocateNioBuffer(int capacity, boolean direct) {
+    @Override
+	public ByteBuffer allocateNioBuffer(int capacity, boolean direct) {
         ByteBuffer nioBuffer;
         if (direct) {
             nioBuffer = ByteBuffer.allocateDirect(capacity);
@@ -45,11 +47,13 @@ public class CWSimpleBufferAllocator implements CWIoBufferAllocator {
         return nioBuffer;
     }
 
-    public CWIoBuffer wrap(ByteBuffer nioBuffer) {
+    @Override
+	public CWIoBuffer wrap(ByteBuffer nioBuffer) {
         return new SimpleBuffer(nioBuffer);
     }
 
-    public void dispose() {
+    @Override
+	public void dispose() {
         // Do nothing
     }
 

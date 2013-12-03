@@ -39,7 +39,7 @@ public class Main extends AbstractCommFwkService {
 		ASConfig.init(this.configFile);
 		
 		// start TCP server to wait client connect
-		int listenPort = ASConfig.getInstance().getIntValue("ALERT_SERVER_PORT");
+		int listenPort = ASConfig.getInstance().getIntValue("ALERT_SERVER_PORT", 9001);
 		CWTcpServer tcpServer = new CWTcpServer(listenPort);
 		
 		ASTcpServerSessionManager sessionMgr = new ASTcpServerSessionManager();
@@ -52,11 +52,10 @@ public class Main extends AbstractCommFwkService {
 		
 		ASWsMain wsMain = new ASWsMain();
 		wsMain.start(alertDistributor);
-//		wsMain.startTest(alertDistributor);
 		
 		String succStr = "AlertServer started successfully";
-		System.out.println(succStr);
 		logger.info(succStr);
+		System.out.println(succStr);
 	}
 
 	/**

@@ -4,17 +4,11 @@ import java.net.InetSocketAddress;
 
 import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
 import org.apache.mina.core.future.ConnectFuture;
-import org.apache.mina.filter.codec.ProtocolCodecFactory;
-import org.apache.mina.filter.codec.ProtocolCodecFilter;
-import org.apache.mina.filter.codec.textline.LineDelimiter;
-import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
-import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.SocketSessionConfig;
 import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
 import com.chinawiserv.fwk.comm.tcp.CWTcpHandler;
 import com.chinawiserv.fwk.comm.tcp.CWTcpClientImpl;
-import com.chinawiserv.fwk.constant.CWCharset;
 import com.chinawiserv.fwk.constant.ETcpAppProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
 
@@ -75,7 +69,7 @@ public class MinaTcpClientImpl implements CWTcpClientImpl {
 		DefaultIoFilterChainBuilder filterChain = connector.getFilterChain();
 		filterChain.addLast("codec", MinaUtil.pickProtocol(_protocol));
 		// loggingFilter should be the last one !!
-		filterChain.addLast("logging", new MinaCWLoggingFilter(MinaTcpClientImpl.class));
+		filterChain.addLast("logging", new MinaCWLoggingFilter());
 		 
 		ConnectFuture cf = connector.connect(new InetSocketAddress(remoteIp, remotePort));
 		

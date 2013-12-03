@@ -150,9 +150,14 @@ public class ASTcpServerHandler implements CWTcpHandler {
 				
 				session.setAttribute(ASSessionAttrKeyConstant.SECURITY.LOGIN_STATUS, EASLoginStatus.LOGIN);
 				session.setAttribute(ASSessionAttrKeyConstant.SECURITY.USER_NAME, username);
+				
+				logger.info("Client ["+username+"] has connected");
 			}
 			else {
+				logger.warn("Client ["+username+"] has tried to connect, but authorize failed");
+				
 				session.setAttribute(ASSessionAttrKeyConstant.SECURITY.LOGIN_STATUS, EASLoginStatus.LOGIN_FAIL);
+				session.close();
 			}
 		}
 		else { // normal msg transmition

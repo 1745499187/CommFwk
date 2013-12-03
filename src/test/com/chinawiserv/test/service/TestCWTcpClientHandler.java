@@ -14,7 +14,6 @@ import com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession;
 import com.chinawiserv.fwk.comm.tcp.buffer.CWIoBuffer;
 import com.chinawiserv.fwk.comm.tcp.mina.EMinaDecodeState;
 import com.chinawiserv.fwk.constant.CWCharset;
-import com.chinawiserv.service.alertserver.auth.AuthUser;
 import com.chinawiserv.service.alertserver.typedef.ASMsg;
 import com.chinawiserv.service.alertserver.util.SecurityUtil;
 import com.chinawiserv.service.alertserver.util.StringUtil;
@@ -138,6 +137,8 @@ public class TestCWTcpClientHandler implements CWTcpHandler {
 			Integer infoType = (Integer)json.get("infotype");
 			String randnum = (String)json.get("randnum");
 	
+//	        String user = "weibin";
+//	        String password = "weibin";
 	        String user = "admin";
 	        String password = "admin";
 	        String content = user + ":" + password;

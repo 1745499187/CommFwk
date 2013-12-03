@@ -1,6 +1,5 @@
 package com.chinawiserv.fwk.comm.tcp.mina;
 
-import org.apache.mina.core.future.IoFuture;
 import org.apache.mina.core.future.ReadFuture;
 import org.apache.mina.core.session.IoSession;
 

@@ -106,7 +106,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
      * @param parent The buffer we get the properties from
      */
     protected CWAbstractIoBuffer(CWAbstractIoBuffer parent) {
-        setAllocator(parent.getAllocator());
+        setAllocator(CWIoBuffer.getAllocator());
         this.recapacityAllowed = false;
         this.derived = true;
         this.minimumCapacity = parent.minimumCapacity;
@@ -513,7 +513,8 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    public CWIoBuffer putUnsigned(byte value) {
+    @Override
+	public CWIoBuffer putUnsigned(byte value) {
         autoExpand(1);
         buf().put((byte) (value & 0xff));
         return this;
@@ -522,7 +523,8 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    public CWIoBuffer putUnsigned(int index, byte value) {
+    @Override
+	public CWIoBuffer putUnsigned(int index, byte value) {
         autoExpand(index, 1);
         buf().put(index, (byte) (value & 0xff));
         return this;
@@ -531,7 +533,8 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    public CWIoBuffer putUnsigned(short value) {
+    @Override
+	public CWIoBuffer putUnsigned(short value) {
         autoExpand(1);
         buf().put((byte) (value & 0x00ff));
         return this;
@@ -540,7 +543,8 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    public CWIoBuffer putUnsigned(int index, short value) {
+    @Override
+	public CWIoBuffer putUnsigned(int index, short value) {
         autoExpand(index, 1);
         buf().put(index, (byte) (value & 0x00ff));
         return this;
@@ -549,7 +553,8 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    public CWIoBuffer putUnsigned(int value) {
+    @Override
+	public CWIoBuffer putUnsigned(int value) {
         autoExpand(1);
         buf().put((byte) (value & 0x000000ff));
         return this;
@@ -558,7 +563,8 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    public CWIoBuffer putUnsigned(int index, int value) {
+    @Override
+	public CWIoBuffer putUnsigned(int index, int value) {
         autoExpand(index, 1);
         buf().put(index, (byte) (value & 0x000000ff));
         return this;
@@ -567,7 +573,8 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    public CWIoBuffer putUnsigned(long value) {
+    @Override
+	public CWIoBuffer putUnsigned(long value) {
         autoExpand(1);
         buf().put((byte) (value & 0x00000000000000ffL));
         return this;
@@ -576,7 +583,8 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    public CWIoBuffer putUnsigned(int index, long value) {
+    @Override
+	public CWIoBuffer putUnsigned(int index, long value) {
         autoExpand(index, 1);
         buf().put(index, (byte) (value & 0x00000000000000ffL));
         return this;
@@ -1274,7 +1282,8 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    public int compareTo(CWIoBuffer that) {
+    @Override
+	public int compareTo(CWIoBuffer that) {
         int n = this.position() + Math.min(this.remaining(), that.remaining());
         for (int i = this.position(), j = that.position(); i < n; i++, j++) {
             byte v1 = this.get(i);
@@ -2459,7 +2468,8 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    public <E extends Enum<E>> E getEnumInt(int index, Class<E> enumClass) {
+    @Override
+	public <E extends Enum<E>> E getEnumInt(int index, Class<E> enumClass) {
         return toEnum(enumClass, getInt(index));
     }
 

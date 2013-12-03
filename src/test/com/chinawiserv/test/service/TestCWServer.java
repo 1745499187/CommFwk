@@ -1,7 +1,5 @@
 package com.chinawiserv.test.service;
 
-import org.apache.log4j.PropertyConfigurator;
-
 import com.chinawiserv.fwk.comm.tcp.CWTcpServer;
 import com.chinawiserv.fwk.constant.ETcpAppProtocol;
 

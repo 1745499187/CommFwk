@@ -24,6 +24,7 @@ public class CWIterable<T> implements Iterable<T> {
 		
 	}
 	
+	@Override
 	public Iterator<T> iterator() {
 		
 		return new CWIterator<T>(iter);

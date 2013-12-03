@@ -1,11 +1,5 @@
 package com.chinawiserv.test.service;
 
-import java.nio.charset.CharacterCodingException;
-import java.nio.charset.Charset;
-
-import org.apache.mina.core.buffer.IoBuffer;
-import org.apache.mina.core.buffer.IoBufferAllocator;
-import org.apache.mina.core.buffer.SimpleBufferAllocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

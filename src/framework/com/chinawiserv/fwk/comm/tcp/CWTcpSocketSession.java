@@ -1,7 +1,5 @@
 package com.chinawiserv.fwk.comm.tcp;
 
-import java.net.SocketAddress;
-
 import com.chinawiserv.fwk.session.CWAbstractSession;
 
 /**
@@ -26,19 +24,23 @@ public class CWTcpSocketSession extends CWAbstractSession {
 		 impl = _impl;
 	 }
 	 
-	 public Object read() {
+	 @Override
+	public Object read() {
 		 return impl.read();
 	 }
 	 
-	 public Object read(int timeout) {
+	 @Override
+	public Object read(int timeout) {
 		 return impl.read(timeout);
 	 }
 	 
-	 public void write( Object message ) {
+	 @Override
+	public void write( Object message ) {
 		 impl.write(message);
 	 }
 	 
-	 public boolean close() {
+	 @Override
+	public boolean close() {
 		 return impl.close();
 		 
 	 }

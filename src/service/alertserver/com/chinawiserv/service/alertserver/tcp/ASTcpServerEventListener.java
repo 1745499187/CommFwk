@@ -38,6 +38,8 @@ public class ASTcpServerEventListener extends CWAbstractSessionEventListener {
 		String userName = (String)session.getAttribute(ASSessionAttrKeyConstant.SECURITY.USER_NAME);
 		if(userName != null) {
 			sessionMgr.remove(userName);
+			
+			logger.info("Client ["+userName+"] has disconnected");
 		}
 		
 		// clean all attr at the last

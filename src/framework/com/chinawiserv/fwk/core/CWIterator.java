@@ -24,17 +24,20 @@ public class CWIterator<T> implements Iterator<T>  {
 		
 	}
 	
+	@Override
 	public boolean hasNext() {
 		
 		return iter.hasNext();
 	}
 
+	@Override
 	public T next() {
 
 		return iter.next();
 		
 	}
 
+	@Override
 	public void remove() {
 		
 		throw new UnsupportedOperationException();

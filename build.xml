@@ -136,9 +136,7 @@
 		<mkdir dir="${thisBuild}" />
 		<mkdir dir="${thisDist}" />
 		<mkdir dir="${thisDist}/lib"/>
-		<!-- merged into "bin" for convenience
 		<mkdir dir="${thisDist}/conf"/> 
-		-->
 		<mkdir dir="${thisDist}/bin"/>
 		<mkdir dir="${thisDist}/doc"/>
 		
@@ -169,7 +167,7 @@
 		<move file="${thisDist}/${thisTargetFile}" todir="${thisDist}/bin" />
 		
 		<!-- copy config files -->
-		<copy todir="${thisDist}/bin">
+		<copy todir="${thisDist}/conf">
 			<fileset dir="${thisConf}" includes="*.*" />
 		</copy>
 		

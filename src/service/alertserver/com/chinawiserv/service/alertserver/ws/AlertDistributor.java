@@ -1,10 +1,9 @@
 package com.chinawiserv.service.alertserver.ws;
 
+import java.util.Iterator;
 import java.util.Timer;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +11,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import com.chinawiserv.fwk.session.CWSession;
+import com.chinawiserv.service.alertserver.ASConfig;
 import com.chinawiserv.service.alertserver.tcp.ASTcpServerSessionManager;
 import com.chinawiserv.service.alertserver.typedef.ASMsg;
 
@@ -27,7 +27,7 @@ public class AlertDistributor implements Runnable {
 		this.alertQueueRaw = new LinkedBlockingQueue<ASMsg>();
 		this.alertCacheCleaner = new AlertCacheCleaner(this.sessionMgr);
 		
-		this.startCleanTask(1000);
+		this.startCleanTask(ASConfig.getInstance().getIntValue("PROCESS_CACHE_INTERVAL", 1) * 1000);
 	}
 
 	private void startCleanTask(int period) {
@@ -36,6 +36,7 @@ public class AlertDistributor implements Runnable {
 	}
 	
 	public void putAlert(ASMsg alert) throws InterruptedException {
+		logger.debug("New alert received: " + alert);
 		this.alertQueueRaw.put(alert);
 	}
 	
@@ -70,7 +71,10 @@ public class AlertDistributor implements Runnable {
 					alert.registerReader(whoView.getString(i));
 				}
 				
-				for(String reader : alert.getReaders()) {
+				Iterator<String> ite = alert.readerIterator();
+				while(ite.hasNext()) {
+					String reader = ite.next();
+					
 					CWSession session = this.sessionMgr.get(reader);
 
 					if (session == null) {
@@ -78,7 +82,7 @@ public class AlertDistributor implements Runnable {
 						continue;
 					} else {
 						session.write(alert.toBuffer());
-						alert.removeReader(reader);
+						ite.remove();
 					}
 				}
 			} catch (Exception e) {

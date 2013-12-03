@@ -2,17 +2,8 @@ package com.chinawiserv.fwk.comm.tcp.mina;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.charset.Charset;
-
 import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
-import org.apache.mina.core.filterchain.IoFilterChainBuilder;
-import org.apache.mina.core.service.IoHandler;
 import org.apache.mina.core.service.IoHandlerAdapter;
-import org.apache.mina.filter.codec.ProtocolCodecFactory;
-import org.apache.mina.filter.codec.ProtocolCodecFilter;
-import org.apache.mina.filter.codec.textline.LineDelimiter;
-import org.apache.mina.filter.codec.textline.TextLineCodecFactory;
-import org.apache.mina.filter.logging.LoggingFilter;
 import org.apache.mina.transport.socket.SocketAcceptor;
 import org.apache.mina.transport.socket.SocketSessionConfig;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
@@ -21,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import com.chinawiserv.fwk.comm.tcp.CWTcpHandler; 
 import com.chinawiserv.fwk.comm.tcp.CWTcpServerImpl; 
-import com.chinawiserv.fwk.constant.CWCharset;
 import com.chinawiserv.fwk.constant.ETcpAppProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
 
@@ -61,6 +51,7 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 		port = _port;
 	}
 	
+	@Override
 	public boolean open(ETcpAppProtocol _protocol) {
 		
 		InetSocketAddress address = null;
@@ -87,7 +78,7 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 		DefaultIoFilterChainBuilder filterChain = acceptor.getFilterChain();
 		filterChain.addLast("codec", MinaUtil.pickProtocol(_protocol));
 		// loggingFilter should be the last one !!
-		filterChain.addLast("logging", new MinaCWLoggingFilter(MinaTcpServerImpl.class));
+		filterChain.addLast("logging", new MinaCWLoggingFilter());
 		
 		IoHandlerAdapter minaTcpServerHandler = new MinaTcpServerHandler( handler , sessionEventListener );
 		//IoHandlerAdapter minaTcpServerHandler = new MinaTcpServerHandlerTest();
@@ -109,6 +100,7 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 		return true;
 	}
 	
+	@Override
 	public void setCWTcpHandler( CWTcpHandler _handler ) { 
 			handler =  _handler;
 	}

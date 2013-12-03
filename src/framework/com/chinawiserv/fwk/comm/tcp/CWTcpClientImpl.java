@@ -1,7 +1,5 @@
 package com.chinawiserv.fwk.comm.tcp;
 
-import org.apache.mina.filter.codec.ProtocolCodecFactory;
-
 import com.chinawiserv.fwk.constant.ETcpAppProtocol;
 import com.chinawiserv.fwk.session.CWSessionEventListener;
 

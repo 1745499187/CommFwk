@@ -8,28 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MinaCWLoggingFilter extends IoFilterAdapter {
-	
-	protected Logger logger;
+	private final static Logger logger = LoggerFactory.getLogger(MinaCWLoggingFilter.class);
 	
 	protected static String LINE_DELIMITER = "\r\n";
 	
 	public MinaCWLoggingFilter() {
-		logger = LoggerFactory.getLogger(MinaCWLoggingFilter.class);
 	}
-	
-	public MinaCWLoggingFilter(String name) {
-		if(name == null) {
-			logger = LoggerFactory.getLogger(MinaCWLoggingFilter.class);
-		}
-		else {
-			logger = LoggerFactory.getLogger(name);
-		}
-	}
-	
-	public MinaCWLoggingFilter(Class<?> clazz) {
-		logger = LoggerFactory.getLogger(clazz);
-	}
-	
+			
 	@Override
     public void exceptionCaught(NextFilter nextFilter, IoSession session, Throwable cause) throws Exception {
 		logger.warn("Session [" + session + "] exception :", cause);
@@ -44,7 +29,7 @@ public class MinaCWLoggingFilter extends IoFilterAdapter {
 
     @Override
     public void messageSent(NextFilter nextFilter, IoSession session, WriteRequest writeRequest) throws Exception {
-    	logger.info("Session [" + session + "] sent :" + LINE_DELIMITER + writeRequest.getMessage());
+    	logger.debug("Session [" + session + "] sent :" + LINE_DELIMITER + writeRequest.getMessage());
         nextFilter.messageSent(session, writeRequest);
     }
 

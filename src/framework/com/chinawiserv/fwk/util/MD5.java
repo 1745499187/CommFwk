@@ -29,7 +29,7 @@ public final class MD5 {
 		byte[] ret = md5.digest(message);
 		StringBuilder sb = new StringBuilder();
 		for(byte b : ret) {
-			sb.append(String.format("%02x", (int)b & 0xff));
+			sb.append(String.format("%02x", b & 0xff));
 		}
 		return sb.toString();
 	}

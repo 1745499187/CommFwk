@@ -14,6 +14,7 @@ package com.chinawiserv.fwk.core;
  */
 public abstract class CWRunnable implements Runnable {
 	
+	@Override
 	public void run() {
 
 		try {

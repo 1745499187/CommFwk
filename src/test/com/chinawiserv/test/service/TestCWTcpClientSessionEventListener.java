@@ -1,18 +1,11 @@
 package com.chinawiserv.test.service;
 
-import java.util.Date;
-
-import net.sf.json.JSONObject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.chinawiserv.fwk.comm.tcp.CWTcpHandler;
-import com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession;
 import com.chinawiserv.fwk.core.CWException;
 import com.chinawiserv.fwk.session.CWAbstractSessionEventListener;
 import com.chinawiserv.fwk.session.CWSession;
-import com.chinawiserv.service.alertserver.typedef.ASMsg;
 
 /**
  * <li>文件名称: TestCWTcpSocketHandler.java</li>

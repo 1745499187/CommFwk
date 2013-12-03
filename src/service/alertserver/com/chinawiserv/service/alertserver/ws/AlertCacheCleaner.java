@@ -1,15 +1,13 @@
 package com.chinawiserv.service.alertserver.ws;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 import com.chinawiserv.fwk.session.CWSession;
 import com.chinawiserv.service.alertserver.ASConfig;
@@ -42,30 +40,40 @@ public class AlertCacheCleaner extends TimerTask {
 	@Override
 	public void run() {
 		int currentMsgCount = this.cachedAlerts.size();
-		for(int i=0;i<currentMsgCount;i++) {
-			try {
-				ASMsg alert = this.cachedAlerts.take();
-				
-				if (alert.getReaders().size() <= 0) {
-					// no whoview
-					this.checkAndStoreBack(alert);
-					continue;
-				}
-				else {
-					for (String reader : alert.getReaders()) {
-						CWSession session = this.sessionMgr.get(reader);
-	
-						if (session == null) {
+		
+		logger.debug("Start process cached alerts, cache size: " + currentMsgCount);
+		
+		if(currentMsgCount > 0) {
+			for(int i=0;i<currentMsgCount;i++) {
+				try {
+					ASMsg alert = this.cachedAlerts.take();
+					
+					if (alert.getReaders().size() <= 0) {
+						// no whoview
+						this.checkAndStoreBack(alert);
+						continue;
+					}
+					else {
+						Iterator<String> ite = alert.readerIterator();
+						while(ite.hasNext()) {
+							String reader = ite.next();
+							CWSession session = this.sessionMgr.get(reader);
+		
+							if (session == null) {
+								continue;
+							} else {
+								session.write(alert.toBuffer());
+								ite.remove();
+							}
+						}
+						
+						if(alert.getReaders().size() > 0) {
 							this.checkAndStoreBack(alert);
-							continue;
-						} else {
-							session.write(alert.toBuffer());
-							alert.removeReader(reader);
 						}
 					}
+				} catch(Exception e) {
+					logger.error("Error when clean alertCache", e);
 				}
-			} catch(Exception e) {
-				logger.error("Error when clean alertCache", e);
 			}
 		}
 	}
@@ -73,7 +81,7 @@ public class AlertCacheCleaner extends TimerTask {
 	private void checkAndStoreBack(ASMsg alert) throws InterruptedException {
 		Date now = new Date();
 		long timeDiff = now.getTime() - alert.getTimeStamp().getTime();
-		if(timeDiff > this.MSG_CACHE_TIME * 60 * 1000) {
+		if(timeDiff < this.MSG_CACHE_TIME * 60 * 1000) {
 			this.cachedAlerts.put(alert);
 		}
 	}

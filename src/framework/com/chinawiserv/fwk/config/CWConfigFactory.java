@@ -1,11 +1,5 @@
 package com.chinawiserv.fwk.config;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
-
 /**
  * <li>文件名称: DefaultCWConfigImpl.java</li>
  * <li>文件描述: 本类描述</li>
