@@ -1,12 +1,7 @@
 package com.chinawiserv.fwk.config;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import com.chinawiserv.fwk.comm.sms.CWSmsConfigManager;
-
 /**
- * <li>文件名称: CWConfigManager.java</li>
+ * <li>文件名称: DefaultCWConfigImpl.java</li>
  * <li>文件描述: 本类描述</li>
  * <li>版权所有: 版权所有(C)2005-2013</li>
  * <li>公司: 勤智数码</li>
@@ -17,6 +12,15 @@ import com.chinawiserv.fwk.comm.sms.CWSmsConfigManager;
  * @version 1.0
  * @author FWK Team
  */
-public class CWConfigManager {
+public class CWSectionConfigFactory {
+	
+	public static CWSectionConfig build(String configFile) {
+		try {
+			CWSectionConfig config = new DefaultCWSectionConfigImpl(configFile);
+			return config;
+		} catch (Throwable t) {
+			throw new RuntimeException(t);
+		}
+	}
 	
 }

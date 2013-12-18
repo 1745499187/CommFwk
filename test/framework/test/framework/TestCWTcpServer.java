@@ -15,7 +15,7 @@ import com.chinawiserv.fwk.constant.ETcpAppProtocol;
  * @version 1.0
  * @author FWK Team
  */
-public class TestCWServer {
+public class TestCWTcpServer {
 	/**
 	 * @param args
 	 */
