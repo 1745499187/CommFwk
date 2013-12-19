@@ -34,8 +34,6 @@ public final class CWFramework {
 			}
 			
 			fwkCfgMgr = new CWFrameworkConfigManager(configFile);
-			
-			this.init();
 		} catch(Throwable t) {
 			logger.error("Error when initial CWFramework", t);
 			t.printStackTrace();
@@ -57,6 +55,9 @@ public final class CWFramework {
 			synchronized(CWFramework.class) {
 				if(instance == null) {
 					instance = new CWFramework();
+					// once object created, init it at first time
+					// must init after object constructed, because there might be some operation related to this instance
+					instance.init();
 				}
 			}
 		}
