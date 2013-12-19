@@ -69,6 +69,7 @@
 		
 		<property name="thisSrc" value="${srcFwkDir}" />
 		<property name="thisLib" value="${libFwkDir}" />
+		<property name="thisConf" value="${confFwkDir}" />
 		<property name="thisDoc" value="${docFwkDir}" />
 		<property name="thisBuild" value="${buildFwkDir}" />
 		<property name="thisDist" value="${distFwkDir}" />
@@ -79,6 +80,7 @@
 		<javac srcdir="${thisSrc}" destdir="${thisBuild}" debug="true" debuglevel="source,lines,vars">
 			<classpath>
 				<fileset dir="${libFwkDir}" includes="*.jar" />
+				<fileset dir="${libFwkDir}/sms" includes="*.jar" />
 			</classpath>
 		</javac>
 		
@@ -86,10 +88,18 @@
 		
 		<mkdir dir="${thisDist}/bin"/>
 		<mkdir dir="${thisDist}/lib"/>
+		<mkdir dir="${thisDist}/conf"/>
 		<mkdir dir="${thisDist}/doc"/>
 		
 		<copy todir="${thisDist}/lib">
 			<fileset dir="${thisLib}" includes="*.jar" />
+		</copy>
+		<copy todir="${thisDist}/lib">
+			<fileset dir="${thisLib}/sms" includes="*.jar" />
+		</copy>
+		
+		<copy todir="${thisDist}/conf">
+			<fileset dir="${thisConf}" includes="*.*" />
 		</copy>
 		
 		<move file="${thisDist}/${thisTargetFile}" todir="${thisDist}/bin" />

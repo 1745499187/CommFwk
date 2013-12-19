@@ -16,10 +16,11 @@ public final class CWFwkConstant {
 		
 			public static final class FIELDS {
 				public static final class MAIN {
-					public static final String ENABLE_SMS = "ENABLE_SMS";
+					
 				}
 				
 				public static final class SMS_GATEWAY {
+					public static final String ENABLE = "ENABLE";
 					public static final String SMS_CONF = "SMS_CONF";
 				}
 			}

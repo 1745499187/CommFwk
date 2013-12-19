@@ -14,6 +14,8 @@ public final class CWFramework {
 	private static CWFramework instance = null;
 	
 	private CWFrameworkConfigManager fwkCfgMgr = null;
+	
+	private boolean enableSmsGateway = true;
 	private CWSmsGateway smsGateway = null;
 	
 	private CWFramework() {
@@ -26,6 +28,8 @@ public final class CWFramework {
 			}
 			
 			fwkCfgMgr = new CWFrameworkConfigManager(configFile);
+			
+			this.init();
 		} catch(Throwable t) {
 			logger.error("Error when initial CWFramework", t);
 			t.printStackTrace();
@@ -34,7 +38,12 @@ public final class CWFramework {
 	}
 	
 	private void init() {
-		smsGateway = CWSmsGateway.getInstance();
+		// init sms gateway if this feature has been configured as enable
+		this.enableSmsGateway = this.fwkCfgMgr.getBoolValue(CWFwkConstant.CONF.SECTIONS.NAMES.SMS_GATEWAY, 
+				CWFwkConstant.CONF.SECTIONS.FIELDS.SMS_GATEWAY.ENABLE, true);
+		if(this.enableSmsGateway) {
+			this.smsGateway = CWSmsGateway.getInstance();
+		}
 	}
 	
 	public static CWFramework getInstance() {
@@ -42,7 +51,6 @@ public final class CWFramework {
 			synchronized(CWFramework.class) {
 				if(instance == null) {
 					instance = new CWFramework();
-					instance.init();
 				}
 			}
 		}
@@ -54,6 +62,11 @@ public final class CWFramework {
 	}
 	
 	public CWSmsGateway getSmsGateway() {
-		return this.smsGateway;
+		if(this.enableSmsGateway) {
+			return this.smsGateway;
+		}
+		else {
+			throw new CWRuntimeException("SMS gateway is disabled by configuration. If you want to use this feature, enable it first.");
+		}
 	}
 }

@@ -1,0 +1,20 @@
+1. 初始化
+要使用框架需要先配置框架的配置文件: framework.properties，通常位于out/dist/framework/conf文件夹下。
+系统通过一个System Property来定位该配置文件，property name=commfwk.conf。
+因此，在使用该框架时需要在JVM启动参数中设置该属性，如: java -Dcommfwk.conf=xxx/framework.properties [other_options] [main_class]
+然后，框架会在首次用到的时候自动初始化，代码如下：
+  CWFramework instance = CWFramework.getInstance();
+
+2. 使用
+框架整合了TCP组件和CCL的SmsSender组件。
+使用TCP进行开发时需要用户定制自己的通信协议及数据处理逻辑，通常以service形式发布，请参考AlertServer。
+短信功能则是被直接整合在框架中，由框架进行了封装。
+
+3. 短信网关(SmsGateway)的使用
+短信网关的功能由CCL组件: SmsSender提供。
+调用过程一般为：
+	CWSmsGateway smsGw = CWFramework.getInstance().getSmsGateway();
+	CWSmsSession smsSession = smsGw.getSessionManager().openSession();
+	smsSession.sendSms("18012345678", "hello, world!", ESmsGatewayType.SGIP);
+	smsSession.close();
+注意：由于短信的接收部分较为复杂，故目前只提供了发送接口，接收接口将后续完成。
