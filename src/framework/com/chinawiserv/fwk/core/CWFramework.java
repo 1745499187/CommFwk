@@ -19,8 +19,14 @@ public final class CWFramework {
 	private CWSmsGateway smsGateway = null;
 	
 	private CWFramework() {
+		String configFile = System.getProperty(CWFwkConstant.JVM_KEY.FWK_CONF);
+		if(configFile == null) {
+			CWRuntimeException exp = new CWRuntimeException("Missing framework config file, please special it in system property: " + CWFwkConstant.JVM_KEY.FWK_CONF);
+			logger.error(exp.getMessage(), exp);
+			throw exp;
+		}
+		
 		try {
-			String configFile = System.getProperty(CWFwkConstant.JVM_KEY.FWK_CONF);
 			File f = new File(configFile);
 			if(f.exists()) {
 				String confDir = f.getParentFile().getAbsolutePath();
@@ -33,7 +39,7 @@ public final class CWFramework {
 		} catch(Throwable t) {
 			logger.error("Error when initial CWFramework", t);
 			t.printStackTrace();
-			throw new RuntimeException(t);
+			throw new CWRuntimeException(t);
 		}
 	}
 	
