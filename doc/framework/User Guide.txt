@@ -18,3 +18,4 @@
 	smsSession.sendSms("18012345678", "hello, world!", ESmsGatewayType.SGIP);
 	smsSession.close();
 注意：由于短信的接收部分较为复杂，故目前只提供了发送接口，接收接口将后续完成。
+               另外，请联系SmsSender负责人以更新该组件库，组件库位于{project}/lib/framework/sms下。
