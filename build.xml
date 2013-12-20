@@ -77,7 +77,7 @@
 		<mkdir dir="${thisBuild}" />
 		<mkdir dir="${thisDist}" />
 		
-		<javac srcdir="${thisSrc}" destdir="${thisBuild}" debug="true" debuglevel="source,lines,vars">
+		<javac srcdir="${thisSrc}" destdir="${thisBuild}" encoding="utf-8" debug="true" debuglevel="source,lines,vars">
 			<classpath>
 				<fileset dir="${libFwkDir}" includes="*.jar" />
 				<fileset dir="${libFwkDir}/sms" includes="*.jar" />
@@ -151,7 +151,7 @@
 		<mkdir dir="${thisDist}/doc"/>
 		
 		<!-- compile -->
-		<javac srcdir="${thisSrc}" destdir="${thisBuild}" debug="true" debuglevel="source,lines,vars">
+		<javac srcdir="${thisSrc}" destdir="${thisBuild}" encoding="utf-8" debug="true" debuglevel="source,lines,vars">
 			<classpath>
 				<fileset dir="${distFwkDir}/bin" includes="*.jar" />
 				<fileset dir="${libFwkDir}" includes="*.jar" />

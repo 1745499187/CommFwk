@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src/framework"/>
 	<classpathentry kind="src" path="src/service/alertserver"/>
-	<classpathentry kind="src" path="src/service/smsgateway"/>
 	<classpathentry kind="src" path="test/framework"/>
 	<classpathentry kind="src" path="test/service/alertserver"/>
 	<classpathentry kind="src" path="conf"/>
@@ -39,6 +38,12 @@
 	<classpathentry kind="lib" path="lib/service/alertserver/servlet-api.jar"/>
 	<classpathentry kind="lib" path="lib/service/alertserver/wsdl4j-1.6.2.jar"/>
 	<classpathentry kind="lib" path="lib/service/alertserver/xmlschema-core-2.0.1.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SmsSender"/>
+	<classpathentry kind="lib" path="lib/framework/sms/ganymed-ssh2-build210.jar"/>
+	<classpathentry kind="lib" path="lib/framework/sms/jsch-0.1.41.jar"/>
+	<classpathentry kind="lib" path="lib/framework/sms/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="lib/framework/sms/smgpapi20100109.jar"/>
+	<classpathentry kind="lib" path="lib/framework/sms/smproxyApi.jar"/>
+	<classpathentry kind="lib" path="lib/framework/sms/sms-sender.jar"/>
+	<classpathentry kind="lib" path="lib/framework/sms/universe-communicate.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
