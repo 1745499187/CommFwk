@@ -38,7 +38,7 @@ public class MinaTcpClientHandler extends IoHandlerAdapter {
 			cwSessionEventListener = _cwSessionEventListener;
 		} 
 		
-		@Override
+		
 		public void sessionCreated(IoSession session) {
 			CWTcpSocketSessionImpl sessionImpl = new MinaCWTcpSocketSessionImpl( session );
 			cwTcpSocketSession = new CWTcpSocketSession();
@@ -54,7 +54,7 @@ public class MinaTcpClientHandler extends IoHandlerAdapter {
 			}
 		}
 
-		@Override
+		
 		public void sessionClosed(IoSession session) throws Exception { 
 			CWTcpSocketSession cwTcpSocketSession = sessionMap.get(session);
 			if( cwTcpSocketSession == null )
@@ -63,7 +63,7 @@ public class MinaTcpClientHandler extends IoHandlerAdapter {
 			cwSessionEventListener.sessionClosed(cwTcpSocketSession);
 		}
 
-		@Override
+		
 		public void sessionOpened(IoSession session) throws Exception { 
 			CWTcpSocketSession cwTcpSocketSession = sessionMap.get(session);
 			if( cwTcpSocketSession == null )
@@ -72,11 +72,11 @@ public class MinaTcpClientHandler extends IoHandlerAdapter {
 			cwSessionEventListener.sessionOpened(cwTcpSocketSession);
 		}
 
-		@Override
+		
 		public void sessionIdle(IoSession session, IdleStatus status) { 
 		}
 
-		@Override
+		
 		public void exceptionCaught(IoSession session, Throwable cause) { 
 			CWTcpSocketSession cwTcpSocketSession = sessionMap.get(session);
 			if( cwTcpSocketSession == null )
@@ -90,7 +90,7 @@ public class MinaTcpClientHandler extends IoHandlerAdapter {
 			}
 		}
 
-		@Override
+		
 		public void messageReceived(IoSession session, Object message) {
 			CWTcpSocketSession cwTcpSocketSession = sessionMap.get(session);
 			if( cwTcpSocketSession == null )

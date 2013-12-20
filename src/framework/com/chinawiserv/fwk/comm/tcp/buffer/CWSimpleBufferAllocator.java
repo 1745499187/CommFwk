@@ -31,12 +31,12 @@ import java.nio.ByteOrder;
  */
 public class CWSimpleBufferAllocator implements CWIoBufferAllocator {
 
-    @Override
+    
 	public CWIoBuffer allocate(int capacity, boolean direct) {
         return wrap(allocateNioBuffer(capacity, direct));
     }
 
-    @Override
+    
 	public ByteBuffer allocateNioBuffer(int capacity, boolean direct) {
         ByteBuffer nioBuffer;
         if (direct) {
@@ -47,12 +47,12 @@ public class CWSimpleBufferAllocator implements CWIoBufferAllocator {
         return nioBuffer;
     }
 
-    @Override
+    
 	public CWIoBuffer wrap(ByteBuffer nioBuffer) {
         return new SimpleBuffer(nioBuffer);
     }
 
-    @Override
+    
 	public void dispose() {
         // Do nothing
     }
@@ -71,47 +71,47 @@ public class CWSimpleBufferAllocator implements CWIoBufferAllocator {
             this.buf = buf;
         }
 
-        @Override
+        
         public ByteBuffer buf() {
             return buf;
         }
 
-        @Override
+        
         protected void buf(ByteBuffer buf) {
             this.buf = buf;
         }
 
-        @Override
+        
         protected CWIoBuffer duplicate0() {
             return new SimpleBuffer(this, this.buf.duplicate());
         }
 
-        @Override
+        
         protected CWIoBuffer slice0() {
             return new SimpleBuffer(this, this.buf.slice());
         }
 
-        @Override
+        
         protected CWIoBuffer asReadOnlyBuffer0() {
             return new SimpleBuffer(this, this.buf.asReadOnlyBuffer());
         }
 
-        @Override
+        
         public byte[] array() {
             return buf.array();
         }
 
-        @Override
+        
         public int arrayOffset() {
             return buf.arrayOffset();
         }
 
-        @Override
+        
         public boolean hasArray() {
             return buf.hasArray();
         }
 
-        @Override
+        
         public void free() {
             // Do nothing
         }

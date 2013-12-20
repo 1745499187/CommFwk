@@ -59,12 +59,12 @@ public class DefaultCWSectionConfigImpl implements CWSectionConfig {
 		br.close();
 	}
 	
-	@Override
+	
 	public String getConfigFile() {
 		return this.configFile;
 	}
 
-	@Override
+	
 	public String getStringValue(String section, String key) {
 		String ret = null;
 		
@@ -76,7 +76,7 @@ public class DefaultCWSectionConfigImpl implements CWSectionConfig {
 		return ret;
 	}
 
-	@Override
+	
 	public String getStringValue(String section, String key, String defaultValue) {
 		String ret = null;
 		
@@ -91,7 +91,7 @@ public class DefaultCWSectionConfigImpl implements CWSectionConfig {
 		return ret;
 	}
 
-	@Override
+	
 	@Deprecated
 	public int getIntValue(String section, String key) {
 		int ret = -1;
@@ -109,7 +109,7 @@ public class DefaultCWSectionConfigImpl implements CWSectionConfig {
 		return ret;
 	}
 
-	@Override
+	
 	public int getIntValue(String section, String key, int defaultValue) {
 		int ret = -1;
 		
@@ -131,7 +131,7 @@ public class DefaultCWSectionConfigImpl implements CWSectionConfig {
 		return ret;
 	}
 
-	@Override
+	
 	public boolean getBoolValue(String section, String key) {
 		boolean ret = false;
 		
@@ -151,7 +151,7 @@ public class DefaultCWSectionConfigImpl implements CWSectionConfig {
 		return ret;
 	}
 
-	@Override
+	
 	public boolean getBoolValue(String section, String key, boolean defaultValue) {
 		boolean ret = false;
 		

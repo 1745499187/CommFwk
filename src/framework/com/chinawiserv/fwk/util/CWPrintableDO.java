@@ -15,7 +15,7 @@ public abstract class CWPrintableDO implements Serializable {
 
 	protected final static String LINE_BREAKER = "\r\n";
 	
-	@Override
+	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(LINE_BREAKER+">>>>>>>>>>>>>>>>>>>>>>>>>"+LINE_BREAKER);

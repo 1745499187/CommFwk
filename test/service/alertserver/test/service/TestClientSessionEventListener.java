@@ -25,7 +25,7 @@ public class TestClientSessionEventListener extends CWAbstractSessionEventListen
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#sessionCreated(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession)
 	 */
-	@Override
+	
 	public void sessionCreated(CWSession session) {
 		
 	} 
@@ -33,7 +33,7 @@ public class TestClientSessionEventListener extends CWAbstractSessionEventListen
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSessionEventListener#sessionOpened(com.chinawiserv.fwk.session.CWSession)
 	 */
-	@Override
+	
 	public void sessionOpened(CWSession session) throws CWException {
 //		session.write("Hello!");
 	}
@@ -42,7 +42,7 @@ public class TestClientSessionEventListener extends CWAbstractSessionEventListen
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSessionEventListener#sessionClosed(com.chinawiserv.fwk.session.CWSession)
 	 */
-	@Override
+	
 	public void sessionClosed(CWSession session) throws CWException {
 	}
 
@@ -50,7 +50,7 @@ public class TestClientSessionEventListener extends CWAbstractSessionEventListen
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSessionEventListener#exceptionCaught(com.chinawiserv.fwk.session.CWSession, java.lang.Throwable)
 	 */
-	@Override
+	
 	public void exceptionCaught(CWSession session, Throwable cause) throws CWException {
 	}
 }

@@ -27,7 +27,7 @@ public class TestCWTcpServerHandler extends CWAbstractSessionEventListener imple
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#sessionCreated(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession)
 	 */
-	@Override
+	
 	public void sessionCreated(CWSession session) {
 		// TODO Auto-generated method stub
 		
@@ -36,7 +36,7 @@ public class TestCWTcpServerHandler extends CWAbstractSessionEventListener imple
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#sessionClosed(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession)
 	 */
-	@Override
+	
 	public void sessionClosed(CWSession session) throws CWException {
 		// TODO Auto-generated method stub
 		
@@ -45,14 +45,14 @@ public class TestCWTcpServerHandler extends CWAbstractSessionEventListener imple
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#sessionOpened(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession)
 	 */
-	@Override
+	
 	public void sessionOpened(CWSession session) throws CWException {
 	}
 
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#exceptionCaught(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Throwable)
 	 */
-	@Override
+	
 	public void exceptionCaught(CWSession session, Throwable cause) {
 		// TODO Auto-generated method stub
 		
@@ -61,7 +61,7 @@ public class TestCWTcpServerHandler extends CWAbstractSessionEventListener imple
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#messageReceived(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Object)
 	 */
-	@Override
+	
 	public void messageReceived(CWTcpSocketSession session, Object message) {
 		if(message instanceof String) {
 			String reply = "Echo: " + (String)message;
@@ -72,7 +72,7 @@ public class TestCWTcpServerHandler extends CWAbstractSessionEventListener imple
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#messageSent(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Object)
 	 */
-	@Override
+	
 	public void messageSent(CWTcpSocketSession session, Object message) {
 	}
 

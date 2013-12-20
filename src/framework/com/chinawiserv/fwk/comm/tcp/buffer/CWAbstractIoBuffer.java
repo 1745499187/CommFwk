@@ -115,7 +115,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final boolean isDirect() {
         return buf().isDirect();
     }
@@ -123,7 +123,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final boolean isReadOnly() {
         return buf().isReadOnly();
     }
@@ -138,7 +138,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final int minimumCapacity() {
         return minimumCapacity;
     }
@@ -146,7 +146,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer minimumCapacity(int minimumCapacity) {
         if (minimumCapacity < 0) {
             throw new IllegalArgumentException("minimumCapacity: " + minimumCapacity);
@@ -158,7 +158,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final int capacity() {
         return buf().capacity();
     }
@@ -166,7 +166,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer capacity(int newCapacity) {
         if (!recapacityAllowed) {
             throw new IllegalStateException("Derived buffers and their parent can't be expanded.");
@@ -203,7 +203,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final boolean isAutoExpand() {
         return autoExpand && recapacityAllowed;
     }
@@ -211,7 +211,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final boolean isAutoShrink() {
         return autoShrink && recapacityAllowed;
     }
@@ -219,7 +219,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final boolean isDerived() {
         return derived;
     }
@@ -227,7 +227,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer setAutoExpand(boolean autoExpand) {
         if (!recapacityAllowed) {
             throw new IllegalStateException("Derived buffers and their parent can't be expanded.");
@@ -239,7 +239,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer setAutoShrink(boolean autoShrink) {
         if (!recapacityAllowed) {
             throw new IllegalStateException("Derived buffers and their parent can't be shrinked.");
@@ -251,7 +251,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer expand(int expectedRemaining) {
         return expand(position(), expectedRemaining, false);
     }
@@ -263,7 +263,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer expand(int pos, int expectedRemaining) {
         return expand(pos, expectedRemaining, false);
     }
@@ -295,7 +295,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer shrink() {
 
         if (!recapacityAllowed) {
@@ -348,7 +348,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final int position() {
         return buf().position();
     }
@@ -356,7 +356,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer position(int newPosition) {
         autoExpand(newPosition, 0);
         buf().position(newPosition);
@@ -369,7 +369,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final int limit() {
         return buf().limit();
     }
@@ -377,7 +377,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer limit(int newLimit) {
         autoExpand(newLimit, 0);
         buf().limit(newLimit);
@@ -390,7 +390,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer mark() {
         ByteBuffer byteBuffer = buf();
         byteBuffer.mark();
@@ -402,7 +402,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final int markValue() {
         return mark;
     }
@@ -410,7 +410,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer reset() {
         buf().reset();
         return this;
@@ -419,7 +419,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer clear() {
         buf().clear();
         mark = -1;
@@ -429,7 +429,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer sweep() {
         clear();
         return fillAndReset(remaining());
@@ -438,7 +438,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer sweep(byte value) {
         clear();
         return fillAndReset(value, remaining());
@@ -447,7 +447,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer flip() {
         buf().flip();
         mark = -1;
@@ -457,7 +457,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer rewind() {
         buf().rewind();
         mark = -1;
@@ -467,7 +467,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final int remaining() {
         ByteBuffer byteBuffer = buf();
 
@@ -477,7 +477,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final boolean hasRemaining() {
         ByteBuffer byteBuffer = buf();
 
@@ -487,7 +487,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final byte get() {
         return buf().get();
     }
@@ -495,7 +495,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final short getUnsigned() {
         return (short) (get() & 0xff);
     }
@@ -503,7 +503,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer put(byte b) {
         autoExpand(1);
         buf().put(b);
@@ -513,7 +513,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
 	public CWIoBuffer putUnsigned(byte value) {
         autoExpand(1);
         buf().put((byte) (value & 0xff));
@@ -523,7 +523,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
 	public CWIoBuffer putUnsigned(int index, byte value) {
         autoExpand(index, 1);
         buf().put(index, (byte) (value & 0xff));
@@ -533,7 +533,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
 	public CWIoBuffer putUnsigned(short value) {
         autoExpand(1);
         buf().put((byte) (value & 0x00ff));
@@ -543,7 +543,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
 	public CWIoBuffer putUnsigned(int index, short value) {
         autoExpand(index, 1);
         buf().put(index, (byte) (value & 0x00ff));
@@ -553,7 +553,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
 	public CWIoBuffer putUnsigned(int value) {
         autoExpand(1);
         buf().put((byte) (value & 0x000000ff));
@@ -563,7 +563,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
 	public CWIoBuffer putUnsigned(int index, int value) {
         autoExpand(index, 1);
         buf().put(index, (byte) (value & 0x000000ff));
@@ -573,7 +573,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
 	public CWIoBuffer putUnsigned(long value) {
         autoExpand(1);
         buf().put((byte) (value & 0x00000000000000ffL));
@@ -583,7 +583,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
 	public CWIoBuffer putUnsigned(int index, long value) {
         autoExpand(index, 1);
         buf().put(index, (byte) (value & 0x00000000000000ffL));
@@ -593,7 +593,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final byte get(int index) {
         return buf().get(index);
     }
@@ -601,7 +601,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final short getUnsigned(int index) {
         return (short) (get(index) & 0xff);
     }
@@ -609,7 +609,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer put(int index, byte b) {
         autoExpand(index, 1);
         buf().put(index, b);
@@ -619,7 +619,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer get(byte[] dst, int offset, int length) {
         buf().get(dst, offset, length);
         return this;
@@ -628,7 +628,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer put(ByteBuffer src) {
         autoExpand(src.remaining());
         buf().put(src);
@@ -638,7 +638,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer put(byte[] src, int offset, int length) {
         autoExpand(length);
         buf().put(src, offset, length);
@@ -648,7 +648,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer compact() {
         int remaining = remaining();
         int capacity = capacity();
@@ -701,7 +701,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final ByteOrder order() {
         return buf().order();
     }
@@ -709,7 +709,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer order(ByteOrder bo) {
         buf().order(bo);
         return this;
@@ -718,7 +718,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final char getChar() {
         return buf().getChar();
     }
@@ -726,7 +726,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putChar(char value) {
         autoExpand(2);
         buf().putChar(value);
@@ -736,7 +736,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final char getChar(int index) {
         return buf().getChar(index);
     }
@@ -744,7 +744,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putChar(int index, char value) {
         autoExpand(index, 2);
         buf().putChar(index, value);
@@ -754,7 +754,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CharBuffer asCharBuffer() {
         return buf().asCharBuffer();
     }
@@ -762,7 +762,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final short getShort() {
         return buf().getShort();
     }
@@ -770,7 +770,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putShort(short value) {
         autoExpand(2);
         buf().putShort(value);
@@ -780,7 +780,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final short getShort(int index) {
         return buf().getShort(index);
     }
@@ -788,7 +788,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putShort(int index, short value) {
         autoExpand(index, 2);
         buf().putShort(index, value);
@@ -798,7 +798,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final ShortBuffer asShortBuffer() {
         return buf().asShortBuffer();
     }
@@ -806,7 +806,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final int getInt() {
         return buf().getInt();
     }
@@ -814,7 +814,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putInt(int value) {
         autoExpand(4);
         buf().putInt(value);
@@ -824,7 +824,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedInt(byte value) {
         autoExpand(4);
         buf().putInt((value & 0x00ff));
@@ -834,7 +834,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedInt(int index, byte value) {
         autoExpand(index, 4);
         buf().putInt(index, (value & 0x00ff));
@@ -844,7 +844,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedInt(short value) {
         autoExpand(4);
         buf().putInt((value & 0x0000ffff));
@@ -854,7 +854,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedInt(int index, short value) {
         autoExpand(index, 4);
         buf().putInt(index, (value & 0x0000ffff));
@@ -864,7 +864,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedInt(int value) {
         autoExpand(4);
         buf().putInt(value);
@@ -874,7 +874,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedInt(int index, int value) {
         autoExpand(index, 4);
         buf().putInt(index, value);
@@ -884,7 +884,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedInt(long value) {
         autoExpand(4);
         buf().putInt((int) (value & 0x00000000ffffffff));
@@ -894,7 +894,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedInt(int index, long value) {
         autoExpand(index, 4);
         buf().putInt(index, (int) (value & 0x00000000ffffffffL));
@@ -904,7 +904,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedShort(byte value) {
         autoExpand(2);
         buf().putShort((short) (value & 0x00ff));
@@ -914,7 +914,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedShort(int index, byte value) {
         autoExpand(index, 2);
         buf().putShort(index, (short) (value & 0x00ff));
@@ -924,7 +924,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedShort(short value) {
         autoExpand(2);
         buf().putShort(value);
@@ -934,7 +934,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedShort(int index, short value) {
         autoExpand(index, 2);
         buf().putShort(index, value);
@@ -944,7 +944,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedShort(int value) {
         autoExpand(2);
         buf().putShort((short) value);
@@ -954,7 +954,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedShort(int index, int value) {
         autoExpand(index, 2);
         buf().putShort(index, (short) value);
@@ -964,7 +964,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedShort(long value) {
         autoExpand(2);
         buf().putShort((short) (value));
@@ -974,7 +974,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putUnsignedShort(int index, long value) {
         autoExpand(index, 2);
         buf().putShort(index, (short) (value));
@@ -984,7 +984,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final int getInt(int index) {
         return buf().getInt(index);
     }
@@ -992,7 +992,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putInt(int index, int value) {
         autoExpand(index, 4);
         buf().putInt(index, value);
@@ -1002,7 +1002,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final IntBuffer asIntBuffer() {
         return buf().asIntBuffer();
     }
@@ -1010,7 +1010,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final long getLong() {
         return buf().getLong();
     }
@@ -1018,7 +1018,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putLong(long value) {
         autoExpand(8);
         buf().putLong(value);
@@ -1028,7 +1028,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final long getLong(int index) {
         return buf().getLong(index);
     }
@@ -1036,7 +1036,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putLong(int index, long value) {
         autoExpand(index, 8);
         buf().putLong(index, value);
@@ -1046,7 +1046,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final LongBuffer asLongBuffer() {
         return buf().asLongBuffer();
     }
@@ -1054,7 +1054,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final float getFloat() {
         return buf().getFloat();
     }
@@ -1062,7 +1062,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putFloat(float value) {
         autoExpand(4);
         buf().putFloat(value);
@@ -1072,7 +1072,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final float getFloat(int index) {
         return buf().getFloat(index);
     }
@@ -1080,7 +1080,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putFloat(int index, float value) {
         autoExpand(index, 4);
         buf().putFloat(index, value);
@@ -1090,7 +1090,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final FloatBuffer asFloatBuffer() {
         return buf().asFloatBuffer();
     }
@@ -1098,7 +1098,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final double getDouble() {
         return buf().getDouble();
     }
@@ -1106,7 +1106,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putDouble(double value) {
         autoExpand(8);
         buf().putDouble(value);
@@ -1116,7 +1116,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final double getDouble(int index) {
         return buf().getDouble(index);
     }
@@ -1124,7 +1124,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer putDouble(int index, double value) {
         autoExpand(index, 8);
         buf().putDouble(index, value);
@@ -1134,7 +1134,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final DoubleBuffer asDoubleBuffer() {
         return buf().asDoubleBuffer();
     }
@@ -1142,7 +1142,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer asReadOnlyBuffer() {
         recapacityAllowed = false;
         return asReadOnlyBuffer0();
@@ -1157,7 +1157,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer duplicate() {
         recapacityAllowed = false;
         return duplicate0();
@@ -1172,7 +1172,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer slice() {
         recapacityAllowed = false;
         return slice0();
@@ -1181,7 +1181,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer getSlice(int index, int length) {
         if (length < 0) {
             throw new IllegalArgumentException("length: " + length);
@@ -1215,7 +1215,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public final CWIoBuffer getSlice(int length) {
         if (length < 0) {
             throw new IllegalArgumentException("length: " + length);
@@ -1244,7 +1244,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public int hashCode() {
         int h = 1;
         int p = position();
@@ -1257,7 +1257,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public boolean equals(Object o) {
         if (!(o instanceof CWIoBuffer)) {
             return false;
@@ -1282,7 +1282,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
 	public int compareTo(CWIoBuffer that) {
         int n = this.position() + Math.min(this.remaining(), that.remaining());
         for (int i = this.position(), j = that.position(); i < n; i++, j++) {
@@ -1303,7 +1303,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public String toString() {
         StringBuilder buf = new StringBuilder();
         if (isDirect()) {
@@ -1326,7 +1326,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer get(byte[] dst) {
         return get(dst, 0, dst.length);
     }
@@ -1334,7 +1334,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer put(CWIoBuffer src) {
         return put(src.buf());
     }
@@ -1342,7 +1342,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer put(byte[] src) {
         return put(src, 0, src.length);
     }
@@ -1350,7 +1350,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public int getUnsignedShort() {
         return getShort() & 0xffff;
     }
@@ -1358,7 +1358,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public int getUnsignedShort(int index) {
         return getShort(index) & 0xffff;
     }
@@ -1366,7 +1366,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public long getUnsignedInt() {
         return getInt() & 0xffffffffL;
     }
@@ -1374,7 +1374,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public int getMediumInt() {
         byte b1 = get();
         byte b2 = get();
@@ -1389,7 +1389,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public int getUnsignedMediumInt() {
         int b1 = getUnsigned();
         int b2 = getUnsigned();
@@ -1404,7 +1404,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public int getMediumInt(int index) {
         byte b1 = get(index);
         byte b2 = get(index + 1);
@@ -1419,7 +1419,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public int getUnsignedMediumInt(int index) {
         int b1 = getUnsigned(index);
         int b2 = getUnsigned(index + 1);
@@ -1447,7 +1447,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer putMediumInt(int value) {
         byte b1 = (byte) (value >> 16);
         byte b2 = (byte) (value >> 8);
@@ -1465,7 +1465,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer putMediumInt(int index, int value) {
         byte b1 = (byte) (value >> 16);
         byte b2 = (byte) (value >> 8);
@@ -1483,7 +1483,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public long getUnsignedInt(int index) {
         return getInt(index) & 0xffffffffL;
     }
@@ -1491,25 +1491,25 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public InputStream asInputStream() {
         return new InputStream() {
-            @Override
+            
             public int available() {
                 return CWAbstractIoBuffer.this.remaining();
             }
 
-            @Override
+            
             public synchronized void mark(int readlimit) {
                 CWAbstractIoBuffer.this.mark();
             }
 
-            @Override
+            
             public boolean markSupported() {
                 return true;
             }
 
-            @Override
+            
             public int read() {
                 if (CWAbstractIoBuffer.this.hasRemaining()) {
                     return CWAbstractIoBuffer.this.get() & 0xff;
@@ -1518,7 +1518,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
                 return -1;
             }
 
-            @Override
+            
             public int read(byte[] b, int off, int len) {
                 int remaining = CWAbstractIoBuffer.this.remaining();
                 if (remaining > 0) {
@@ -1530,12 +1530,12 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
                 return -1;
             }
 
-            @Override
+            
             public synchronized void reset() {
                 CWAbstractIoBuffer.this.reset();
             }
 
-            @Override
+            
             public long skip(long n) {
                 int bytes;
                 if (n > Integer.MAX_VALUE) {
@@ -1552,15 +1552,15 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public OutputStream asOutputStream() {
         return new OutputStream() {
-            @Override
+            
             public void write(byte[] b, int off, int len) {
                 CWAbstractIoBuffer.this.put(b, off, len);
             }
 
-            @Override
+            
             public void write(int b) {
                 CWAbstractIoBuffer.this.put((byte) b);
             }
@@ -1570,7 +1570,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public String getHexDump() {
         return this.getHexDump(Integer.MAX_VALUE);
     }
@@ -1578,7 +1578,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public String getHexDump(int lengthLimit) {
         return CWIoBufferHexDumper.getHexdump(this, lengthLimit);
     }
@@ -1586,7 +1586,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public String getString(CharsetDecoder decoder) throws CharacterCodingException {
         if (!hasRemaining()) {
             return "";
@@ -1688,7 +1688,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public String getString(int fieldSize, CharsetDecoder decoder) throws CharacterCodingException {
         checkFieldSize(fieldSize);
 
@@ -1787,7 +1787,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer putString(CharSequence val, CharsetEncoder encoder) throws CharacterCodingException {
         if (val.length() == 0) {
             return this;
@@ -1838,7 +1838,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer putString(CharSequence val, int fieldSize, CharsetEncoder encoder) throws CharacterCodingException {
         checkFieldSize(fieldSize);
 
@@ -1908,7 +1908,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public String getPrefixedString(CharsetDecoder decoder) throws CharacterCodingException {
         return getPrefixedString(2, decoder);
     }
@@ -1923,7 +1923,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
      * @throws CharacterCodingException when decoding fails
      * @throws BufferUnderflowException when there is not enough data available
      */
-    @Override
+    
     public String getPrefixedString(int prefixLength, CharsetDecoder decoder) throws CharacterCodingException {
         if (!prefixedDataAvailable(prefixLength)) {
             throw new BufferUnderflowException();
@@ -1996,7 +1996,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer putPrefixedString(CharSequence in, CharsetEncoder encoder) throws CharacterCodingException {
         return putPrefixedString(in, 2, 0, encoder);
     }
@@ -2004,7 +2004,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer putPrefixedString(CharSequence in, int prefixLength, CharsetEncoder encoder)
             throws CharacterCodingException {
         return putPrefixedString(in, prefixLength, 0, encoder);
@@ -2013,7 +2013,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer putPrefixedString(CharSequence in, int prefixLength, int padding, CharsetEncoder encoder)
             throws CharacterCodingException {
         return putPrefixedString(in, prefixLength, padding, (byte) 0, encoder);
@@ -2022,7 +2022,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer putPrefixedString(CharSequence val, int prefixLength, int padding, byte padValue,
             CharsetEncoder encoder) throws CharacterCodingException {
         int maxLength;
@@ -2140,7 +2140,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public Object getObject() throws ClassNotFoundException {
         return getObject(Thread.currentThread().getContextClassLoader());
     }
@@ -2148,7 +2148,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public Object getObject(final ClassLoader classLoader) throws ClassNotFoundException {
         if (!prefixedDataAvailable(4)) {
             throw new BufferUnderflowException();
@@ -2163,7 +2163,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
         limit(position() + length);
         try {
             ObjectInputStream in = new ObjectInputStream(asInputStream()) {
-                @Override
+                
                 protected ObjectStreamClass readClassDescriptor() throws IOException, ClassNotFoundException {
                     int type = read();
                     if (type < 0) {
@@ -2181,7 +2181,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
                     }
                 }
 
-                @Override
+                
                 protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {
                     String name = desc.getName();
                     try {
@@ -2202,13 +2202,13 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer putObject(Object o) {
         int oldPos = position();
         skip(4); // Make a room for the length field.
         try {
             ObjectOutputStream out = new ObjectOutputStream(asOutputStream()) {
-                @Override
+                
                 protected void writeClassDescriptor(ObjectStreamClass desc) throws IOException {
                     try {
                         Class<?> clz = Class.forName(desc.getName());
@@ -2242,7 +2242,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public boolean prefixedDataAvailable(int prefixLength) {
         return prefixedDataAvailable(prefixLength, Integer.MAX_VALUE);
     }
@@ -2250,7 +2250,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public boolean prefixedDataAvailable(int prefixLength, int maxDataLength) {
         if (remaining() < prefixLength) {
             return false;
@@ -2281,7 +2281,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public int indexOf(byte b) {
         if (hasArray()) {
             int arrayOffset = arrayOffset();
@@ -2311,7 +2311,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer skip(int size) {
         autoExpand(size);
         return position(position() + size);
@@ -2320,7 +2320,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer fill(byte value, int size) {
         autoExpand(size);
         int q = size >>> 3;
@@ -2363,7 +2363,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer fillAndReset(byte value, int size) {
         autoExpand(size);
         int pos = position();
@@ -2378,7 +2378,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer fill(int size) {
         autoExpand(size);
         int q = size >>> 3;
@@ -2412,7 +2412,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer fillAndReset(int size) {
         autoExpand(size);
         int pos = position();
@@ -2428,7 +2428,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> E getEnum(Class<E> enumClass) {
         return toEnum(enumClass, getUnsigned());
     }
@@ -2436,7 +2436,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> E getEnum(int index, Class<E> enumClass) {
         return toEnum(enumClass, getUnsigned(index));
     }
@@ -2444,7 +2444,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> E getEnumShort(Class<E> enumClass) {
         return toEnum(enumClass, getUnsignedShort());
     }
@@ -2452,7 +2452,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> E getEnumShort(int index, Class<E> enumClass) {
         return toEnum(enumClass, getUnsignedShort(index));
     }
@@ -2460,7 +2460,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> E getEnumInt(Class<E> enumClass) {
         return toEnum(enumClass, getInt());
     }
@@ -2468,7 +2468,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
 	public <E extends Enum<E>> E getEnumInt(int index, Class<E> enumClass) {
         return toEnum(enumClass, getInt(index));
     }
@@ -2476,7 +2476,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer putEnum(Enum<?> e) {
         if (e.ordinal() > BYTE_MASK) {
             throw new IllegalArgumentException(enumConversionErrorMessage(e, "byte"));
@@ -2487,7 +2487,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer putEnum(int index, Enum<?> e) {
         if (e.ordinal() > BYTE_MASK) {
             throw new IllegalArgumentException(enumConversionErrorMessage(e, "byte"));
@@ -2498,7 +2498,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer putEnumShort(Enum<?> e) {
         if (e.ordinal() > SHORT_MASK) {
             throw new IllegalArgumentException(enumConversionErrorMessage(e, "short"));
@@ -2509,7 +2509,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer putEnumShort(int index, Enum<?> e) {
         if (e.ordinal() > SHORT_MASK) {
             throw new IllegalArgumentException(enumConversionErrorMessage(e, "short"));
@@ -2520,7 +2520,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer putEnumInt(Enum<?> e) {
         return putInt(e.ordinal());
     }
@@ -2528,7 +2528,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public CWIoBuffer putEnumInt(int index, Enum<?> e) {
         return putInt(index, e.ordinal());
     }
@@ -2549,7 +2549,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> EnumSet<E> getEnumSet(Class<E> enumClass) {
         return toEnumSet(enumClass, get() & BYTE_MASK);
     }
@@ -2557,7 +2557,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> EnumSet<E> getEnumSet(int index, Class<E> enumClass) {
         return toEnumSet(enumClass, get(index) & BYTE_MASK);
     }
@@ -2565,7 +2565,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> EnumSet<E> getEnumSetShort(Class<E> enumClass) {
         return toEnumSet(enumClass, getShort() & SHORT_MASK);
     }
@@ -2573,7 +2573,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> EnumSet<E> getEnumSetShort(int index, Class<E> enumClass) {
         return toEnumSet(enumClass, getShort(index) & SHORT_MASK);
     }
@@ -2581,7 +2581,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> EnumSet<E> getEnumSetInt(Class<E> enumClass) {
         return toEnumSet(enumClass, getInt() & INT_MASK);
     }
@@ -2589,7 +2589,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> EnumSet<E> getEnumSetInt(int index, Class<E> enumClass) {
         return toEnumSet(enumClass, getInt(index) & INT_MASK);
     }
@@ -2597,7 +2597,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> EnumSet<E> getEnumSetLong(Class<E> enumClass) {
         return toEnumSet(enumClass, getLong());
     }
@@ -2605,7 +2605,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> EnumSet<E> getEnumSetLong(int index, Class<E> enumClass) {
         return toEnumSet(enumClass, getLong(index));
     }
@@ -2625,7 +2625,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> CWIoBuffer putEnumSet(Set<E> set) {
         long vector = toLong(set);
         if ((vector & ~BYTE_MASK) != 0) {
@@ -2637,7 +2637,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> CWIoBuffer putEnumSet(int index, Set<E> set) {
         long vector = toLong(set);
         if ((vector & ~BYTE_MASK) != 0) {
@@ -2649,7 +2649,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> CWIoBuffer putEnumSetShort(Set<E> set) {
         long vector = toLong(set);
         if ((vector & ~SHORT_MASK) != 0) {
@@ -2661,7 +2661,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> CWIoBuffer putEnumSetShort(int index, Set<E> set) {
         long vector = toLong(set);
         if ((vector & ~SHORT_MASK) != 0) {
@@ -2673,7 +2673,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> CWIoBuffer putEnumSetInt(Set<E> set) {
         long vector = toLong(set);
         if ((vector & ~INT_MASK) != 0) {
@@ -2685,7 +2685,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> CWIoBuffer putEnumSetInt(int index, Set<E> set) {
         long vector = toLong(set);
         if ((vector & ~INT_MASK) != 0) {
@@ -2697,7 +2697,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> CWIoBuffer putEnumSetLong(Set<E> set) {
         return putLong(toLong(set));
     }
@@ -2705,7 +2705,7 @@ public abstract class CWAbstractIoBuffer extends CWIoBuffer {
     /**
      * {@inheritDoc}
      */
-    @Override
+    
     public <E extends Enum<E>> CWIoBuffer putEnumSetLong(int index, Set<E> set) {
         return putLong(index, toLong(set));
     }

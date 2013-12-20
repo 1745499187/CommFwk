@@ -25,7 +25,7 @@ public class CWSmsCclImpl implements CWSmsImpl {
 	}
 	
 	
-	@Override
+	
 	public void sendSms(String mobile, String message, ESmsGatewayType gatewayType) {
 		switch(gatewayType) {
 		case SGIP: // 联通

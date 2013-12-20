@@ -38,7 +38,7 @@ public class AlertCacheCleaner extends TimerTask {
 		return this.cachedAlerts.size();
 	}
 	
-	@Override
+	
 	public void run() {
 		int currentMsgCount = this.cachedAlerts.size();
 		

@@ -34,7 +34,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#open()
 	 */
-	@Override
+	
 	public boolean open() {
 		// TODO Auto-generated method stub
 		return true;
@@ -43,7 +43,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#close()
 	 */
-	@Override
+	
 	public boolean close() {
 		// TODO Auto-generated method stub
 		return true;
@@ -52,7 +52,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#getStatus()
 	 */
-	@Override
+	
 	public CWSessionStatus getStatus() {
 		// TODO Auto-generated method stub
 		return null;
@@ -61,7 +61,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#getAttribute(java.lang.Object)
 	 */
-	@Override
+	
 	public Object getAttribute(Object key) {  
 		if( attrMap.containsKey(key) )
 			return attrMap.get(key);
@@ -72,7 +72,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#getAttribute(java.lang.Object, java.lang.Object)
 	 */
-	@Override
+	
 	public Object getAttribute(Object key, Object defaultValue) { 
 		if( containsAttribute(key) ) {
 			return getAttribute(key);
@@ -85,7 +85,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#setAttribute(java.lang.Object, java.lang.Object)
 	 */
-	@Override
+	
 	public Object setAttribute(Object key, Object value) { 
 		if (containsAttribute(key)) {
 			Object old_value = attrMap.get(key);
@@ -100,7 +100,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#setAttributeIfAbsent(java.lang.Object, java.lang.Object)
 	 */
-	@Override
+	
 	public Object setAttributeIfAbsent(Object key, Object value) {
 
 		if (containsAttribute(key)) {
@@ -113,7 +113,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#removeAttribute(java.lang.Object)
 	 */
-	@Override
+	
 	public Object removeAttribute(Object key) {
 		if( containsAttribute(key) ) {
 			Object value = attrMap.get(key);
@@ -127,7 +127,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#removeAttribute(java.lang.Object, java.lang.Object)
 	 */
-	@Override
+	
 	public boolean removeAttribute(Object key, Object value) {
 		if (containsAttribute(key) && getAttribute(key).equals(value)) {
 			removeAttribute(key);
@@ -140,7 +140,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#replaceAttribute(java.lang.Object, java.lang.Object, java.lang.Object)
 	 */
-	@Override
+	
 	public boolean replaceAttribute(Object key, Object oldValue, Object newValue) {
 		 if (containsAttribute(key) && getAttribute(key).equals(oldValue)) {
 			 setAttribute(key, newValue);
@@ -153,7 +153,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#containsAttribute(java.lang.Object)
 	 */
-	@Override
+	
 	public boolean containsAttribute(Object key) {
 		return attrMap.containsKey(key);
 	}
@@ -161,7 +161,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#getAttributeKeys()
 	 */
-	@Override
+	
 	public Set<Object> getAttributeKeys() {
 		return attrMap.keySet();
 	} 
@@ -169,7 +169,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#clearAttributes()
 	 */
-	@Override
+	
 	public void clearAttributes() {
 		attrMap.clear();
 	}
@@ -177,7 +177,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#getName()
 	 */
-	@Override
+	
 	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
@@ -186,7 +186,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#getId()
 	 */
-	@Override
+	
 	public long getId() {
 		return this.id;
 		
@@ -195,7 +195,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#getListener()
 	 */
-	@Override
+	
 	public CWSessionEventListener getListener() { 
 		return listener;
 	}
@@ -203,7 +203,7 @@ public abstract class CWAbstractSession implements CWSession {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.session.CWSession#setListener(com.chinawiserv.fwk.session.CWSessionEventListener)
 	 */
-	@Override
+	
 	public void setListener(CWSessionEventListener _listener) {
 		listener = _listener;
 		

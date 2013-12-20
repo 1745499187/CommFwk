@@ -12,7 +12,7 @@ import com.chinawiserv.fwk.comm.tcp.buffer.CWIoBuffer;
 public class CWBinaryDecoder extends ProtocolDecoderAdapter {
 	private final static Logger logger = LoggerFactory.getLogger(CWBinaryDecoder.class);
 	
-	@Override
+	
 	public void decode(IoSession session, IoBuffer in, ProtocolDecoderOutput out) throws Exception {
 		CWIoBuffer cwBuf = CWIoBuffer.allocate(in.remaining());
 		cwBuf.put(in.buf());

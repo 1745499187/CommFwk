@@ -15,24 +15,24 @@ public class CWSmsSession extends CWAbstractSession {
 		this.sessionId = sessionId;
 	}
 
-	@Override
+	
 	@Deprecated
 	public void write(Object message) {
 	}
 
-	@Override
+	
 	@Deprecated
 	public Object read() {
 		return null;
 	}
 
-	@Override
+	
 	@Deprecated
 	public Object read(int timeout) {
 		return null;
 	}
 
-	@Override
+	
 	public boolean close() {
 		this.clearAttributes();
 		this.sessionHolder.remove(this.sessionId);

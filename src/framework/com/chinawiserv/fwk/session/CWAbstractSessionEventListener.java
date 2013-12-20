@@ -20,7 +20,7 @@ public abstract class CWAbstractSessionEventListener implements CWSessionEventLi
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.event.CWEventListener#eventOccured(com.chinawiserv.fwk.event.CWEvent)
 	 */
-	@Override
+	
 	public void eventOccured(CWEvent _event) { 
 		CWSessionEvent event = (CWSessionEvent)_event;
 		CWSession session = event.getSession();

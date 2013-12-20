@@ -38,7 +38,7 @@ public class TestClientHandler implements CWTcpHandler {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#messageReceived(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Object)
 	 */
-	@Override
+	
 	public void messageReceived(CWTcpSocketSession session, Object message) {
 		try {
 			if(message instanceof CWIoBuffer) {
@@ -52,7 +52,7 @@ public class TestClientHandler implements CWTcpHandler {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#messageSent(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Object)
 	 */
-	@Override
+	
 	public void messageSent(CWTcpSocketSession session, Object message) {
 	}
 

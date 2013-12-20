@@ -30,7 +30,7 @@ public class CWSessionEvent extends CWEvent {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.core.CWEvent#toString()
 	 */
-	@Override
+	
 	public String toString() { 
 		return type.name() + "(" + type.ordinal() + ")";
 	}
@@ -38,7 +38,7 @@ public class CWSessionEvent extends CWEvent {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.event.CWEvent#name()
 	 */
-	@Override
+	
 	public String name() {
 		return type.name();
 	}
@@ -46,7 +46,7 @@ public class CWSessionEvent extends CWEvent {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.event.CWEvent#value()
 	 */
-	@Override
+	
 	public int value() {
 		return type.ordinal();
 	}

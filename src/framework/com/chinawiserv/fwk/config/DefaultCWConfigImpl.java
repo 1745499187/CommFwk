@@ -25,7 +25,7 @@ public class DefaultCWConfigImpl implements CWConfig {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.config.CWConfig#getConfigFile()
 	 */
-	@Override
+	
 	public String getConfigFile() {
 		return this.configFile;
 	}
@@ -33,7 +33,7 @@ public class DefaultCWConfigImpl implements CWConfig {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.config.CWConfig#getStringValue(java.lang.String)
 	 */
-	@Override
+	
 	public String getStringValue(String key) {
 		return this.configHolder.getProperty(key);
 	}
@@ -41,7 +41,7 @@ public class DefaultCWConfigImpl implements CWConfig {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.config.CWConfig#getStringValue(java.lang.String, java.lang.String)
 	 */
-	@Override
+	
 	public String getStringValue(String key, String defaultValue) {
 		return this.configHolder.getProperty(key, defaultValue);
 	}
@@ -49,7 +49,7 @@ public class DefaultCWConfigImpl implements CWConfig {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.config.CWConfig#getIntValue(java.lang.String)
 	 */
-	@Override
+	
 	@Deprecated
 	public int getIntValue(String key) {
 		int ret = 0;
@@ -65,7 +65,7 @@ public class DefaultCWConfigImpl implements CWConfig {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.config.CWConfig#getIntValue(java.lang.String, int)
 	 */
-	@Override
+	
 	public int getIntValue(String key, int defaultValue) {
 		int ret = 0;
 		String val = this.configHolder.getProperty(key);
@@ -80,7 +80,7 @@ public class DefaultCWConfigImpl implements CWConfig {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.config.CWConfig#getBoolValue(java.lang.String)
 	 */
-	@Override
+	
 	public boolean getBoolValue(String key) {
 		boolean ret = false;
 		
@@ -98,7 +98,7 @@ public class DefaultCWConfigImpl implements CWConfig {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.config.CWConfig#getBoolValue(java.lang.String, boolean)
 	 */
-	@Override
+	
 	public boolean getBoolValue(String key, boolean defaultValue) {
 		boolean ret = false;
 		

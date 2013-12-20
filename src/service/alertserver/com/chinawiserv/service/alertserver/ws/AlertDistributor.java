@@ -44,7 +44,7 @@ public class AlertDistributor implements Runnable {
 		return this.alertQueueRaw.size();
 	}
 
-	@Override
+	
 	public void run() {
 		while (true) {
 			ASMsg alert = null;

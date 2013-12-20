@@ -17,7 +17,7 @@ public class ASAlertCollectorWsImpl implements ASAlertCollectorWs{
 		this.alertDistributor = alertDistributor;
 	}
 	
-    @Override
+    
 	public void sendInfo(String info){
         logger.debug("Reveived info: "+info);
         

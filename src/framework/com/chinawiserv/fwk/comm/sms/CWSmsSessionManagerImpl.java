@@ -11,7 +11,7 @@ public class CWSmsSessionManagerImpl implements CWSmsSessionManager {
 	private final CWSessionEventListener sessionListener = new CWSmsSessionEventListener();
 	private Map<Integer, CWSmsSession> sessionHolder = new ConcurrentHashMap<Integer, CWSmsSession>();
 	
-	@Override
+	
 	public CWSmsSession openSession() {
 		CWSmsSession session = new CWSmsSession(this.getNextSessionId());
 		session.setSessionHolder(this.sessionHolder);

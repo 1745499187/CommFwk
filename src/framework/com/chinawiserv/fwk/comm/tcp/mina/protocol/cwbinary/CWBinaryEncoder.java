@@ -13,7 +13,7 @@ import com.chinawiserv.fwk.comm.tcp.buffer.CWIoBuffer;
 public class CWBinaryEncoder extends ProtocolEncoderAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(CWBinaryEncoder.class);
 	
-	@Override
+	
 	public void encode(IoSession session, Object message, ProtocolEncoderOutput out) throws Exception {
 		if(message instanceof CWIoBuffer) {
 			CWIoBuffer msgToSend = (CWIoBuffer)message;

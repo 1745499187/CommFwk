@@ -19,7 +19,7 @@ public class CWSessionManager implements CWManager {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.core.CWManager#getManagerName()
 	 */
-	@Override
+	
 	public String getManagerName() {
 		// TODO Auto-generated method stub
 		return "CWSessionManager";

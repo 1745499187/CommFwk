@@ -33,7 +33,7 @@ public class Main extends AbstractCommFwkService {
 		}
 	}
 
-	@Override
+	
 	public void start() {
 		// initial configuration
 		ASConfig.init(this.configFile);

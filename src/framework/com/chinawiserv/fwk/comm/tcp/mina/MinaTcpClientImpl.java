@@ -40,7 +40,7 @@ public class MinaTcpClientImpl implements CWTcpClientImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpSocketImpl#setRemoteIp(java.lang.String)
 	 */
-	@Override
+	
 	public void setRemoteIp(String _remoteIp) {
 		remoteIp = _remoteIp;
 		
@@ -49,7 +49,7 @@ public class MinaTcpClientImpl implements CWTcpClientImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpSocketImpl#setRemotePort(int)
 	 */
-	@Override
+	
 	public void setRemotePort(int _remotePort) {
 		remotePort = _remotePort;
 		
@@ -58,7 +58,7 @@ public class MinaTcpClientImpl implements CWTcpClientImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpSocketImpl#open()
 	 */
-	@Override
+	
 	public boolean open(ETcpAppProtocol _protocol) {
 		connector = new NioSocketConnector(); 
 		connector.setHandler(new MinaTcpClientHandler( handler, sessionEventListener ));
@@ -82,7 +82,7 @@ public class MinaTcpClientImpl implements CWTcpClientImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpSocketImpl#close()
 	 */
-	@Override
+	
 	public boolean close() {
 		// TODO Auto-generated method stub
 		return false;
@@ -91,7 +91,7 @@ public class MinaTcpClientImpl implements CWTcpClientImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpSocketImpl#setHandler(com.chinawiserv.fwk.comm.tcp.CWTcpHandler)
 	 */
-	@Override
+	
 	public void setCWTcpHandler(CWTcpHandler _handler) {
 		handler = _handler;
 		
@@ -100,7 +100,7 @@ public class MinaTcpClientImpl implements CWTcpClientImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpSocketImpl#setCWSessionEventListener(com.chinawiserv.fwk.session.CWSessionEventListener)
 	 */
-	@Override
+	
 	public void setCWSessionEventListener(CWSessionEventListener _listener) {
 		sessionEventListener = _listener;
 		

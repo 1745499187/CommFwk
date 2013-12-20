@@ -26,14 +26,14 @@ public class ASTcpServerEventListener extends CWAbstractSessionEventListener {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#sessionCreated(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession)
 	 */
-	@Override
+	
 	public void sessionCreated(CWSession session) {
 	}
 
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#sessionClosed(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession)
 	 */
-	@Override
+	
 	public void sessionClosed(CWSession session) throws CWException {
 		String userName = (String)session.getAttribute(ASSessionAttrKeyConstant.SECURITY.USER_NAME);
 		if(userName != null) {
@@ -49,7 +49,7 @@ public class ASTcpServerEventListener extends CWAbstractSessionEventListener {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#sessionOpened(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession)
 	 */
-	@Override
+	
 	public void sessionOpened(CWSession session) throws CWException {
 		String randnum =  UUID.randomUUID().toString().substring(0, 24);
         JSONObject jsonObj = new JSONObject();
@@ -69,7 +69,7 @@ public class ASTcpServerEventListener extends CWAbstractSessionEventListener {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpHandler#exceptionCaught(com.chinawiserv.fwk.comm.tcp.CWTcpSocketSession, java.lang.Throwable)
 	 */
-	@Override
+	
 	public void exceptionCaught(CWSession session, Throwable cause) {
 	}
 }

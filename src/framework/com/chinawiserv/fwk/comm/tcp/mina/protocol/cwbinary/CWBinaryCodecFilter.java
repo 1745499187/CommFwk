@@ -14,7 +14,7 @@ public class CWBinaryCodecFilter extends ProtocolCodecFilter {
 		super(encoder, decoder);
 	}
 	
-	@Override
+	
     public void sessionClosed(IoFilter.NextFilter nextFilter, IoSession session) throws Exception {
         super.sessionClosed(nextFilter, session);
         // remove attributes

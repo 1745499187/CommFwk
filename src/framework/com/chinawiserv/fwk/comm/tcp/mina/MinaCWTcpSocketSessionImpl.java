@@ -29,7 +29,7 @@ public class MinaCWTcpSocketSessionImpl implements CWTcpSocketSessionImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpSocketSessionImpl#read()
 	 */
-	@Override
+	
 	public Object read() {
 		ReadFuture rf = minaSession.read();
 		//ReadFuture rf = minaSession.read().awaitUninterruptibly();
@@ -39,7 +39,7 @@ public class MinaCWTcpSocketSessionImpl implements CWTcpSocketSessionImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpSocketSessionImpl#read(int)
 	 */
-	@Override
+	
 	public Object read(int timeout) {
 		ReadFuture rf = minaSession.read();
 		if(rf.awaitUninterruptibly(timeout)) {
@@ -53,7 +53,7 @@ public class MinaCWTcpSocketSessionImpl implements CWTcpSocketSessionImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpSocketSessionImpl#write(java.lang.Object)
 	 */
-	@Override
+	
 	public void write(Object message) {
 		minaSession.write(message);
 	}
@@ -61,7 +61,7 @@ public class MinaCWTcpSocketSessionImpl implements CWTcpSocketSessionImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpSocketSessionImpl#close()
 	 */
-	@Override
+	
 	public boolean close() { 
 		minaSession.close( true );
 		
@@ -71,7 +71,7 @@ public class MinaCWTcpSocketSessionImpl implements CWTcpSocketSessionImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpSocketSessionImpl#isConnected()
 	 */
-	@Override
+	
 	public boolean isConnected() {
 		return minaSession.isConnected();
 	}
@@ -79,7 +79,7 @@ public class MinaCWTcpSocketSessionImpl implements CWTcpSocketSessionImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpSocketSessionImpl#isClosing()
 	 */
-	@Override
+	
 	public boolean isClosing() {
 		return minaSession.isClosing();
 	}

@@ -51,7 +51,7 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 		port = _port;
 	}
 	
-	@Override
+	
 	public boolean open(ETcpAppProtocol _protocol) {
 		
 		InetSocketAddress address = null;
@@ -100,7 +100,7 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 		return true;
 	}
 	
-	@Override
+	
 	public void setCWTcpHandler( CWTcpHandler _handler ) { 
 			handler =  _handler;
 	}
@@ -108,7 +108,7 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpServerImpl#setIpAddress(java.lang.String)
 	 */
-	@Override
+	
 	public void setIpAddress(String _ipAddr ) {
 		ipAddr = _ipAddr;
 		
@@ -117,7 +117,7 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpServerImpl#setPort(int)
 	 */
-	@Override
+	
 	public void setPort(int _port) {
 		port = _port;
 		
@@ -126,7 +126,7 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpServerImpl#close()
 	 */
-	@Override
+	
 	public boolean close() {
 		// TODO Auto-generated method stub
 		return false;
@@ -135,7 +135,7 @@ public class MinaTcpServerImpl implements CWTcpServerImpl {
 	/* (non-Javadoc)
 	 * @see com.chinawiserv.fwk.comm.tcp.CWTcpServerImpl#setCWSessionEventListener(com.chinawiserv.fwk.session.CWSessionEventListener)
 	 */
-	@Override
+	
 	public void setCWSessionEventListener(CWSessionEventListener _listener) {
 		sessionEventListener = _listener;
 		
