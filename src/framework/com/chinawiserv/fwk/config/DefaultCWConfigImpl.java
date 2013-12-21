@@ -1,6 +1,7 @@
 package com.chinawiserv.fwk.config;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -18,8 +19,8 @@ public class DefaultCWConfigImpl implements CWConfig {
 	
 	private void init() throws FileNotFoundException, IOException {
 		File f = new File(this.configFile);
-		FileReader fr = new FileReader(f);
-		this.configHolder.load(fr);
+		FileInputStream fis = new FileInputStream(f);
+		this.configHolder.load(fis);
 	}
 	
 	/* (non-Javadoc)
