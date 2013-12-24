@@ -44,6 +44,6 @@
 	<classpathentry kind="lib" path="lib/framework/sms/smproxyApi.jar"/>
 	<classpathentry kind="lib" path="lib/framework/sms/sms-sender.jar"/>
 	<classpathentry kind="lib" path="lib/framework/sms/universe-communicate.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk15022_x64"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk15022"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
