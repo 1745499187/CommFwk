@@ -2,6 +2,7 @@ package com.chinawiserv.service.alertserver.ws;
 
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -55,16 +56,19 @@ public class AlertCacheCleaner extends TimerTask {
 						continue;
 					}
 					else {
-						Iterator<String> ite = alert.readerIterator();
-						while(ite.hasNext()) {
-							String reader = ite.next();
-							CWSession session = this.sessionMgr.get(reader);
-		
-							if (session == null) {
-								continue;
-							} else {
-								session.write(alert.toBuffer());
-								ite.remove();
+						Set<String> readers = alert.getReaders();
+						synchronized(readers) {
+							Iterator<String> ite = readers.iterator();
+							while(ite.hasNext()) {
+								String reader = ite.next();
+								CWSession session = this.sessionMgr.get(reader);
+			
+								if (session == null) {
+									continue;
+								} else {
+									session.write(alert.toBuffer());
+									ite.remove();
+								}
 							}
 						}
 						

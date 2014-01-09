@@ -1,6 +1,7 @@
 package com.chinawiserv.service.alertserver.ws;
 
 import java.util.Iterator;
+import java.util.Set;
 import java.util.Timer;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -71,18 +72,21 @@ public class AlertDistributor implements Runnable {
 					alert.registerReader(whoView.getString(i));
 				}
 				
-				Iterator<String> ite = alert.readerIterator();
-				while(ite.hasNext()) {
-					String reader = ite.next();
-					
-					CWSession session = this.sessionMgr.get(reader);
-
-					if (session == null) {
-						logger.info("User has not connected: " + reader);
-						continue;
-					} else {
-						session.write(alert.toBuffer());
-						ite.remove();
+				Set<String> readers = alert.getReaders();
+				synchronized(readers) {
+					Iterator<String> ite = readers.iterator();
+					while(ite.hasNext()) {
+						String reader = ite.next();
+						
+						CWSession session = this.sessionMgr.get(reader);
+	
+						if (session == null) {
+							logger.info("User has not connected: " + reader);
+							continue;
+						} else {
+							session.write(alert.toBuffer());
+							ite.remove();
+						}
 					}
 				}
 			} catch (Exception e) {

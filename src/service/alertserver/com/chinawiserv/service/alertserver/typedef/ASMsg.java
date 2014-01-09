@@ -4,9 +4,9 @@ import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.concurrent.ConcurrentSkipListSet;
 
 import com.chinawiserv.fwk.comm.tcp.buffer.CWIoBuffer;
 import com.chinawiserv.fwk.constant.CWCharset;
@@ -25,13 +25,13 @@ public class ASMsg extends CWPrintableDO {
 	private Date timeStamp;
 
 	public ASMsg() {
-		this.readers = new ConcurrentSkipListSet<String>();
+		this.readers = new HashSet<String>();
 	}
 	
 	public ASMsg(String content) {
 		this.content = content;
 		this.timeStamp = new Date();
-		this.readers = new ConcurrentSkipListSet<String>();
+		this.readers = new HashSet<String>();
 	}
 	
 	/**
@@ -53,16 +53,20 @@ public class ASMsg extends CWPrintableDO {
 	}
 	
 	public void registerReader(String name) {
-		this.readers.add(name);
+		synchronized(this.readers) {
+			this.readers.add(name);
+		}
 	}
 	
 	public void removeReader(String name) {
-		this.readers.remove(name);
+		synchronized(this.readers) {
+			this.readers.remove(name);
+		}
 	}
 	
-	public Iterator<String> readerIterator() {
-		return this.readers.iterator();
-	}
+//	public Iterator<String> readerIterator() {
+//		return this.readers.iterator();
+//	}
 	
 	/**
 	 * @return the timeStamp
